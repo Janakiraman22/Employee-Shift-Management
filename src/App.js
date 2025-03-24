@@ -82,7 +82,7 @@ let eventData = [
     { Id: 32, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-03T13:30:00.000Z"), EndTime: new Date("2025-03-04T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
     { Id: 33, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-04T01:30:00.000Z"), EndTime: new Date("2025-03-04T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 34, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-04T13:30:00.000Z"), EndTime: new Date("2025-03-05T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
-    { Id: 35, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), Description: "Full day Leave" },
+    { Id: 35, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), Description: "Full day Leave (Day Shift)" },
     { Id: 36, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 37, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 38, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
@@ -100,7 +100,7 @@ let eventData = [
     { Id: 49, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 50, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 51, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 52, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-06T19:30:00.000Z"), Description: "Half Day Leave" },
+    { Id: 52, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-06T19:30:00.000Z"), Description: "Half Day Leave (Night Shift)" },
     { Id: 114, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-06T19:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 53, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
     { Id: 54, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
@@ -124,7 +124,7 @@ let eventData = [
     { Id: 67, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 68, RoleId: 2, DesignationId: 5, EmployeeId: 10, Subject: "Lily", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
     { Id: 69, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T07:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 115, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-08T07:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Half day Leave" },
+    { Id: 115, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-08T07:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Half day Leave (Day Shift)" },
     { Id: 70, RoleId: 2, DesignationId: 5, EmployeeId: 10, Subject: "Lily", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
 
     { Id: 71, RoleId: 2, DesignationId: 6, EmployeeId: 11, Subject: "Ava", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
@@ -157,7 +157,7 @@ let eventData = [
     { Id: 93, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 94, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 95, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 96, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Full Day Leave" },    
+    { Id: 96, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Full Day Leave (Night Shift)" },    
     { Id: 97, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 98, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
 
@@ -317,7 +317,7 @@ const majorSlotTemplate = (props) => {
 const timeScale = {
     enable: true,
     interval: 720,
-    slotCount: 4,
+    slotCount: 3,
     majorSlotTemplate: majorSlotTemplate.bind(this),
 };
 
@@ -405,7 +405,7 @@ function App() {
     }
 
     const getTimeString = (value) => {
-        return intl.formatDate(value, { type: 'time', skeleton: 'short' });
+        return intl.formatDate(value, { skeleton: 'h' });
     }
 
     const getDate = (value) => {
@@ -433,7 +433,7 @@ function App() {
         filteredData = eventsData.filter((item) => item.Description.toLowerCase().includes('swap-request') && item.RoleId === roleId && item.DesignationId === designationId && item.Subject !== employeeName);
         filteredData.forEach((item) => {
             if (employeesData1.length === 0 || !employeesData1.some((EmpItem) => EmpItem.name === item.Subject)) {
-                employeesData1.push({ id: item.DesignationId, name: item.Subject, employeeId: item.EmployeeId });
+                employeesData1.push({ id: 1, name: item.Subject, employeeId: item.EmployeeId });
             }
 
             shiftsData1.push({ id: shiftsData1.length + 1, name: (intl.formatDate(item.StartTime, { skeleton: 'MMMd' }) + ' ' + getTimeString(item.StartTime) + ' - ' + intl.formatDate(item.EndTime, { skeleton: 'MMMd' }) + ' ' + getTimeString(item.EndTime)), designationId: item.DesignationId, employeeId: item.EmployeeId, eventId: item.Id });
@@ -461,10 +461,10 @@ function App() {
 
     const getEventElement = (props, element, isOvertime) => {
         let isDefaultEventEle = true;
+        let isDayShift = props.Description.toLowerCase().includes('day shift');
         if (isOvertime) {
             isDefaultEventEle = false;
             let isDayView = scheduleObj.current.currentView === 'TimelineDay';
-            let isDayShift = props.Description.toLowerCase().includes('day');
 
             let eventEleWidth = parseFloat(element.style.width, 10) + 4;
 
@@ -657,7 +657,7 @@ function App() {
             const staffImage = document.createElement('img');
             staffImage.className = 'staff-image';
             // staffImage.textContent = props.Subject.charAt(0);
-            staffImage.src = 'https://ej2.syncfusion.com/react/demos/src/schedule/images/robert.png';
+            staffImage.src = isDayShift ? 'https://ej2.syncfusion.com/react/demos/src/schedule/images/robert.png' : 'https://ej2.syncfusion.com/react/demos/src/schedule/images/nancy.png';
 
             // Create the staff info div
             const staffInfo = document.createElement('div');
@@ -666,7 +666,7 @@ function App() {
             // Create and append the staff name
             const name = document.createElement('div');
             name.className = 'e-name';
-            name.innerHTML = props.Description.toLowerCase().includes('leave') && !props.Subject.toLowerCase().includes('covers') ? props.Description : props.Subject;
+            name.innerHTML = props.Description.toLowerCase().includes('leave') && !props.Subject.toLowerCase().includes('covers') ? props.Description.split('(')[0].trim() : props.Subject;
 
             // Create and append the staff designation
             const designation = document.createElement('div');
@@ -691,7 +691,7 @@ function App() {
 
     const onEventRendered = (args) => {
         let startTime = getTimeString(args.data.StartTime);
-        if (startTime === '7:00 AM' || startTime === '1:00 PM') {
+        if (startTime === '7 AM' || startTime === '1 PM') {
             args.element.classList.add(args.data.Description.includes('On-Call Duty') ? 'on-call-shift' : 'day-shift');
         } else {
             args.element.classList.add(args.data.Description.includes('On-Call Duty') ? 'on-call-shift' : 'night-shift');
@@ -1242,7 +1242,7 @@ function App() {
                     selectedDate={selectedDate}
                     cssClass='schedule-drag-drop'
                     width='100%'
-                    height='100%'
+                    height='80%'
                     // startHour="07:00"
                     // endHour='30:59'
                     group={group}

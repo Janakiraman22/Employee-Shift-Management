@@ -363,7 +363,7 @@
 }
 
 .template-wrap:not(.overtime) {
-    padding: 12px;
+    padding: 4px;
         display: flex;
         flex-direction: column; /* Stack the image/info and shift time vertically */
 }
@@ -908,5 +908,10 @@
     .e-resource-cells.e-parent-node,
     .e-work-cells.e-resource-group-cells {
         height: 30px;
+    }
+
+    .e-resource-cells.e-child-node,
+    .e-work-cells:not(.e-resource-group-cells){
+        height: 40px;
     }
 }

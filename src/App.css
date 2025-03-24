@@ -688,11 +688,13 @@
 
 .e-appointment.day-shift {
     background-color: #0875B8;
+    color: #8BEE56;
 }
 
 
 .e-appointment.day-shift {
     background-color: #633DD0;
+    color: #FFAF40;
 }
 
 .e-appointment.day-shift .staff-image {
@@ -833,7 +835,7 @@
     .e-schedule-table .e-appointment.event-swapped .e-swapped.e-icons,
     .e-schedule-table .e-appointment.e-covers .e-replaced.e-icons,
     .e-schedule-table .e-appointment .e-leave.e-icons {
-        margin-right: 16px;
+        margin-right: 10px;
     }
 }
 

@@ -8,39 +8,74 @@ import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import './Employee Shift Management/style.css';
 import { ChipListComponent, ChipsDirective, ChipDirective } from '@syncfusion/ej2-react-buttons';
 import salamanImage from './Avatar/salman@3x.png';
-import rickyImage from './Avatar/ricky@3x.png';
+import brianImage from './Avatar/brian@3x.png';
+import jakeImage from './Avatar/jake@3x.png';
+
+import jenniferImage from './Avatar/Jennifer.png';
+import davidImage from './Avatar/David.png';
+import williammImage from './Avatar/William.png';
+
+import emmaImage from './Avatar/Emma.png';
+import lilyImage from './Avatar/Lily.png';
+import avaImage from './Avatar/Ava.png';
+import graceImage from './Avatar/Grace.png';
+
+import michaelImage from './Avatar/Michael.png';
+import thomasImage from './Avatar/Thomas.png';
+
+import rickyImage from './Avatar/Ricky.png';
+
+import jamesImage from './Avatar/James.png';
+import benjaminImage from './Avatar/Benjamin.png';
+import oliviaImage from './Avatar/Olivia.png';
+import chloeImage from './Avatar/Chloe.png';
+
+
 import { Query } from '@syncfusion/ej2-data';
 import { ToolbarComponent, ItemsDirective, ItemDirective } from '@syncfusion/ej2-react-navigations';
 import { L10n, setCurrencyCode } from '@syncfusion/ej2-base';
 import { Locale } from './common/locale.ts';
 
-// L10n.load({
-//     "de": {
-//         "schedule": {
 
-//         }
-//     },
-//     "ar": {
-//         "schedule": {
+const employeeRole = [
+    { role: 'Doctors', id: 1 },
+    { role: 'Nurses', id: 2 },
+    { role: 'Support Staffs', id: 3 }
+];
 
-//         }
-//     },
-//     "en": {
-//         "schedule": {
-//             "Doctors": "Doctorsqqq"
-//         }
-//     },
-//     "zh": {
-//         "schedule": {
-//             "Doctors": "醫生"
-//         }
-//     },
-//     "fr-CH": {
-//         "schedule": {
-//             "Doctors": "hghgh"
-//         }
-//     }
-// });
+const designationsData = [
+    { name: 'Attending Physician', id: 1, groupId: 1 },
+    { name: 'Hospitalist', id: 2, groupId: 1 },
+    { name: 'General Pediatrician', id: 3, groupId: 1 },
+    { name: 'Resident Doctor', id: 4, groupId: 1 },
+    { name: 'Senior Nurse', id: 5, groupId: 2 },
+    { name: 'Nurse Practitioner', id: 6, groupId: 2 },
+    { name: 'Medical Assistant', id: 7, groupId: 3 },
+    { name: 'Receptionist', id: 8, groupId: 3 }
+];
+
+const employeeImages = [
+    { name: 'John', image: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/robert.png' },
+    { name: 'Nashil', image: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/nancy.png' },
+    { name: 'Jennifer', image: jenniferImage },
+    { name: 'William', image: williammImage },
+    { name: 'David', image: davidImage },
+    { name: 'Michael', image: michaelImage },
+    { name: 'Thomas', image: thomasImage },
+    { name: 'Daniel', image: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/robson.png' },
+
+    { name: 'Emma', image: emmaImage },
+    { name: 'Lily', image: lilyImage },
+
+    { name: 'Ava', image: avaImage },
+    { name: 'Grace', image: graceImage },
+
+    { name: 'James', image: jamesImage },
+    { name: 'Benjamin', image: benjaminImage },
+    { name: 'Olivia', image: oliviaImage },
+    { name: 'Chloe', image: chloeImage },
+];
+
 
 const selectedDate = new Date(2025, 2, 5);
 const intl = new Internationalization();
@@ -62,35 +97,35 @@ let eventData = [
     { Id: 13, RoleId: 1, DesignationId: 1, EmployeeId: 1, Subject: "John", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 14, RoleId: 1, DesignationId: 1, EmployeeId: 2, Subject: "Nashil", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
 
-    { Id: 15, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Michael", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
+    { Id: 15, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 16, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
-    { Id: 17, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Michael", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
+    { Id: 17, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 18, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-03T13:30:00.000Z"), EndTime: new Date("2025-03-04T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
-    { Id: 19, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Michael", StartTime: new Date("2025-03-04T01:30:00.000Z"), EndTime: new Date("2025-03-04T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
+    { Id: 19, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-04T01:30:00.000Z"), EndTime: new Date("2025-03-04T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 20, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-04T13:30:00.000Z"), EndTime: new Date("2025-03-05T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
-    { Id: 21, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Michael", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
+    { Id: 21, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
     { Id: 22, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
-    { Id: 23, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Michael", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
+    { Id: 23, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 24, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
-    { Id: 25, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Michael", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
+    { Id: 25, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
     { Id: 26, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
-    { Id: 27, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Michael", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
+    { Id: 27, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 28, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
     
     { Id: 29, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
-    { Id: 30, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
+    { Id: 30, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
     { Id: 31, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
-    { Id: 32, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-03T13:30:00.000Z"), EndTime: new Date("2025-03-04T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
+    { Id: 32, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-03T13:30:00.000Z"), EndTime: new Date("2025-03-04T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
     { Id: 33, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-04T01:30:00.000Z"), EndTime: new Date("2025-03-04T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
-    { Id: 34, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-04T13:30:00.000Z"), EndTime: new Date("2025-03-05T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
-    { Id: 35, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), Description: "Full day Leave (Day Shift)" },
-    { Id: 36, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), Description: "Available (Night Shift)" },
+    { Id: 34, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-04T13:30:00.000Z"), EndTime: new Date("2025-03-05T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
+    { Id: 35, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), Description: "Leave (Day Shift)" },
+    { Id: 36, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 37, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 38, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
+    { Id: 38, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
     { Id: 39, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 40, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
+    { Id: 40, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
     { Id: 41, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
-    { Id: 42, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Jennifer", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
+    { Id: 42, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
     
     { Id: 43, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 44, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
@@ -101,8 +136,7 @@ let eventData = [
     { Id: 49, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 50, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 51, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 52, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-06T19:30:00.000Z"), Description: "Half Day Leave (Night Shift)" },
-    { Id: 114, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-06T19:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
+    { Id: 52, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Leave (Night Shift)" },
     { Id: 53, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
     { Id: 54, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
     { Id: 55, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
@@ -124,8 +158,7 @@ let eventData = [
     { Id: 66, RoleId: 2, DesignationId: 5, EmployeeId: 10, Subject: "Lily", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 67, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 68, RoleId: 2, DesignationId: 5, EmployeeId: 10, Subject: "Lily", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
-    { Id: 69, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T07:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 115, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-08T07:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Half day Leave (Day Shift)" },
+    { Id: 115, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Leave (Day Shift)" },
     { Id: 70, RoleId: 2, DesignationId: 5, EmployeeId: 10, Subject: "Lily", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
 
     { Id: 71, RoleId: 2, DesignationId: 6, EmployeeId: 11, Subject: "Ava", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
@@ -158,7 +191,7 @@ let eventData = [
     { Id: 93, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 94, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 95, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 96, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Full Day Leave (Night Shift)" },    
+    { Id: 96, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Leave (Night Shift)" },    
     { Id: 97, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 98, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
 
@@ -176,135 +209,6 @@ let eventData = [
     { Id: 110, RoleId: 3, DesignationId: 8, EmployeeId: 16, Subject: "Chloe", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },    
     { Id: 111, RoleId: 3, DesignationId: 8, EmployeeId: 15, Subject: "Olivia", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
     { Id: 112, RoleId: 3, DesignationId: 8, EmployeeId: 16, Subject: "Chloe", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
-
-
-    // { Id: 2, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: true },
-    // { Id: 5, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift)", IsReadonly: true },
-    // { Id: 7, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: true },
-    // { Id: 9, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-04T01:30:00.000Z"), EndTime: new Date("2025-03-04T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift)", IsReadonly: true },
-    // { Id: 10, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-04T01:30:00.000Z"), EndTime: new Date("2025-03-04T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: true },
-    // { Id: 11, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-03T13:30:00.000Z"), EndTime: new Date("2025-03-04T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift)", IsReadonly: true },
-    // { Id: 12, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-03T13:30:00.000Z"), EndTime: new Date("2025-03-04T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Full Day Leave", "Color": "#FFCDD2", IsReadonly: true },
-    // { Id: 13, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-04T01:30:00.000Z"), EndTime: new Date("2025-03-04T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift)", IsReadonly: true },
-    // { Id: 14, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-03T13:30:00.000Z"), EndTime: new Date("2025-03-04T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: true },
-    // { Id: 15, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-04T01:30:00.000Z"), EndTime: new Date("2025-03-04T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: true },
-    // { Id: 16, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-03T13:30:00.000Z"), EndTime: new Date("2025-03-04T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift)", IsReadonly: true },
-    // { Id: 17, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 18, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 19, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-04T13:30:00.000Z"), EndTime: new Date("2025-03-05T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift)", IsReadonly: true },
-    // { Id: 21, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-04T13:30:00.000Z"), EndTime: new Date("2025-03-05T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty)", IsReadonly: true },
-    // { Id: 22, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T19:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift - Overtime)", IsReadonly: false },
-    // { Id: 23, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-04T13:30:00.000Z"), EndTime: new Date("2025-03-05T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: true },
-    // { Id: 24, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-05T01:30:00.000Z"), EndTime: new Date("2025-03-05T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 25, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-04T13:30:00.000Z"), EndTime: new Date("2025-03-05T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift)", IsReadonly: true },
-    // { Id: 26, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 27, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 28, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift) Swap-Request", IsReadonly: false },
-    // { Id: 29, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Full Day Leave (On-Call Duty)", IsReadonly: false },
-    // { Id: 30, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 31, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-05T19:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Half-Day Leave (Night Shift)", IsReadonly: false },
-    // { Id: 141, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-05T19:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 32, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 33, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift)", "Color": "#FFCDD2", IsReadonly: false },
-    // { Id: 34, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 35, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty - Swap-Request)", IsReadonly: false },
-    // { Id: 36, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 37, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 38, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 39, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 41, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Full Day Leave", "Color": "#FFCDD2", IsReadonly: false },
-    // { Id: 43, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 44, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 45, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 46, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 48, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty - Swap-Request)", IsReadonly: false },
-    // { Id: 49, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T07:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Half-Day Leave", "Color": "#FFECB3", IsReadonly: false },
-    // { Id: 50, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-08T07:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 51, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", "Color": "#FFCDD2", IsReadonly: false },
-    // { Id: 52, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 53, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 54, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-09T01:30:00.000Z"), EndTime: new Date("2025-03-09T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 56, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-09T01:30:00.000Z"), EndTime: new Date("2025-03-09T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 57, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 58, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 59, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-09T01:30:00.000Z"), EndTime: new Date("2025-03-09T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 60, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 61, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-09T01:30:00.000Z"), EndTime: new Date("2025-03-09T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 63, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 64, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-10T01:30:00.000Z"), EndTime: new Date("2025-03-10T19:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift - Overtime)", IsReadonly: false },
-    // { Id: 65, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-10T01:30:00.000Z"), EndTime: new Date("2025-03-10T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty - Swap-Request)", IsReadonly: false },
-    // { Id: 66, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-09T13:30:00.000Z"), EndTime: new Date("2025-03-10T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 68, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-09T13:30:00.000Z"), EndTime: new Date("2025-03-10T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 69, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-10T01:30:00.000Z"), EndTime: new Date("2025-03-10T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 70, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-09T13:30:00.000Z"), EndTime: new Date("2025-03-10T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 71, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-10T01:30:00.000Z"), EndTime: new Date("2025-03-10T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 73, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-09T13:30:00.000Z"), EndTime: new Date("2025-03-10T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 75, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-11T01:30:00.000Z"), EndTime: new Date("2025-03-11T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 77, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-11T01:30:00.000Z"), EndTime: new Date("2025-03-11T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 79, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-10T13:30:00.000Z"), EndTime: new Date("2025-03-11T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 80, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-10T13:30:00.000Z"), EndTime: new Date("2025-03-11T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty - Swap-Request)", IsReadonly: false },
-    // { Id: 81, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-11T01:30:00.000Z"), EndTime: new Date("2025-03-11T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 82, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-10T13:30:00.000Z"), EndTime: new Date("2025-03-11T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 83, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-11T01:30:00.000Z"), EndTime: new Date("2025-03-11T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 85, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-10T13:30:00.000Z"), EndTime: new Date("2025-03-11T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 87, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-12T01:30:00.000Z"), EndTime: new Date("2025-03-12T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 89, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-12T01:30:00.000Z"), EndTime: new Date("2025-03-12T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 90, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-11T13:30:00.000Z"), EndTime: new Date("2025-03-12T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 92, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-11T13:30:00.000Z"), EndTime: new Date("2025-03-12T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 93, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-12T01:30:00.000Z"), EndTime: new Date("2025-03-12T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 94, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-11T13:30:00.000Z"), EndTime: new Date("2025-03-12T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 96, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-12T01:30:00.000Z"), EndTime: new Date("2025-03-12T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 97, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-11T13:30:00.000Z"), EndTime: new Date("2025-03-12T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 98, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-13T01:30:00.000Z"), EndTime: new Date("2025-03-13T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 99, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-13T01:30:00.000Z"), EndTime: new Date("2025-03-13T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 100, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-12T13:30:00.000Z"), EndTime: new Date("2025-03-13T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 101, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-12T13:30:00.000Z"), EndTime: new Date("2025-03-13T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 102, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-13T01:30:00.000Z"), EndTime: new Date("2025-03-13T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 103, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-12T13:30:00.000Z"), EndTime: new Date("2025-03-13T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 104, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-13T01:30:00.000Z"), EndTime: new Date("2025-03-13T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 105, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-12T13:30:00.000Z"), EndTime: new Date("2025-03-13T07:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift - Overtime)", IsReadonly: false },
-    // { Id: 106, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-14T01:30:00.000Z"), EndTime: new Date("2025-03-14T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 107, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-14T01:30:00.000Z"), EndTime: new Date("2025-03-14T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 108, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-13T13:30:00.000Z"), EndTime: new Date("2025-03-14T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 111, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-13T13:30:00.000Z"), EndTime: new Date("2025-03-14T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 112, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-14T01:30:00.000Z"), EndTime: new Date("2025-03-14T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 113, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-13T13:30:00.000Z"), EndTime: new Date("2025-03-14T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 114, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-14T01:30:00.000Z"), EndTime: new Date("2025-03-14T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 115, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-13T13:30:00.000Z"), EndTime: new Date("2025-03-14T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 116, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-15T01:30:00.000Z"), EndTime: new Date("2025-03-15T07:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 117, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-15T07:30:00.000Z"), EndTime: new Date("2025-03-15T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Half-Day Leave", IsReadonly: false },
-    // { Id: 118, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-15T01:30:00.000Z"), EndTime: new Date("2025-03-15T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 120, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-14T13:30:00.000Z"), EndTime: new Date("2025-03-15T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 121, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-14T13:30:00.000Z"), EndTime: new Date("2025-03-15T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 124, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-15T01:30:00.000Z"), EndTime: new Date("2025-03-15T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 125, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-14T13:30:00.000Z"), EndTime: new Date("2025-03-15T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 126, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-15T01:30:00.000Z"), EndTime: new Date("2025-03-15T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 128, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-14T13:30:00.000Z"), EndTime: new Date("2025-03-15T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 130, Subject: "Robert", Designation: "General Practitioner", StartTime: new Date("2025-03-16T01:30:00.000Z"), EndTime: new Date("2025-03-16T13:30:00.000Z"), RoleId: 1, EmployeeId: 1, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 131, Subject: "Smith", Designation: "Neurologist", StartTime: new Date("2025-03-16T01:30:00.000Z"), EndTime: new Date("2025-03-16T13:30:00.000Z"), RoleId: 1, EmployeeId: 3, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 132, Subject: "Nancy", Designation: "Cardiologist", StartTime: new Date("2025-03-15T13:30:00.000Z"), EndTime: new Date("2025-03-16T01:30:00.000Z"), RoleId: 1, EmployeeId: 2, Description: "Available (Night Shift - Swap-Request)", IsReadonly: false },
-    // { Id: 134, Subject: "Williams", Designation: "General Practitioner", StartTime: new Date("2025-03-15T13:30:00.000Z"), EndTime: new Date("2025-03-16T01:30:00.000Z"), RoleId: 1, EmployeeId: 4, Description: "Available (On-Call Duty)", IsReadonly: false },
-    // { Id: 136, Subject: "Laura", Designation: "Staff Nurse", StartTime: new Date("2025-03-16T01:30:00.000Z"), EndTime: new Date("2025-03-16T13:30:00.000Z"), RoleId: 2, EmployeeId: 5, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 137, Subject: "Margaret", Designation: "Head Nurse", StartTime: new Date("2025-03-15T13:30:00.000Z"), EndTime: new Date("2025-03-16T01:30:00.000Z"), RoleId: 2, EmployeeId: 6, Description: "Available (Night Shift)", IsReadonly: false },
-    // { Id: 138, Subject: "Alice", Designation: "Ward Assistant", StartTime: new Date("2025-03-16T01:30:00.000Z"), EndTime: new Date("2025-03-16T13:30:00.000Z"), RoleId: 3, EmployeeId: 7, Description: "Available (Day Shift)", IsReadonly: false },
-    // { Id: 140, Subject: "Robson", Designation: "Hospital Attendant", StartTime: new Date("2025-03-15T13:30:00.000Z"), EndTime: new Date("2025-03-16T01:30:00.000Z"), RoleId: 3, EmployeeId: 8, Description: "Available (Night Shift)", IsReadonly: false }
-];
-
-const employeeRole = [
-    { role: 'Doctors', id: 1, color: '#0875B8' },
-    { role: 'Nurses', id: 2, color: '#633DD0' },
-    { role: 'Support Staffs', id: 3, color: '#017A34' }
-];
-
-const designationsData = [
-    { name: 'Attending Physician', id: 1, groupId: 1, color: '#ADD8E6' },
-    { name: 'Hospitalist', id: 2, groupId: 1, color: '#6A0DAD' },
-    { name: 'General Pediatrician', id: 3, groupId: 1, color: '#7fa900' },
-    { name: 'Resident Doctor', id: 4, groupId: 1, color: '#7fa900' },
-    { name: 'Senior Nurse', id: 5, groupId: 2, color: '#ea7a57' },
-    { name: 'Nurse Practitioner', id: 6, groupId: 2, color: '#5978ee' },
-    { name: 'Medical Assistant', id: 7, groupId: 3, color: '#df5286' },
-    { name: 'Receptionist', id: 8, groupId: 3, color: '#00bdae' }
 ];
 
 const group = {
@@ -346,7 +250,7 @@ function App() {
     buttons = [
         {
             click: () => {
-                dialogInstance.current.hide();
+                setStatus(false);
             },
             buttonModel: {
                 content: 'CANCEL',
@@ -434,7 +338,7 @@ function App() {
         filteredData = eventsData.filter((item) => item.Description.toLowerCase().includes('swap-request') && item.RoleId === roleId && item.DesignationId === designationId && item.Subject !== employeeName);
         filteredData.forEach((item) => {
             if (employeesData1.length === 0 || !employeesData1.some((EmpItem) => EmpItem.name === item.Subject)) {
-                employeesData1.push({ id: 1, name: item.Subject, employeeId: item.EmployeeId });
+                employeesData1.push({ id: item.DesignationId, name: item.Subject, employeeId: item.EmployeeId });
             }
 
             shiftsData1.push({ id: shiftsData1.length + 1, name: (intl.formatDate(item.StartTime, { skeleton: 'MMMd' }) + ' ' + getTimeString(item.StartTime) + ' - ' + intl.formatDate(item.EndTime, { skeleton: 'MMMd' }) + ' ' + getTimeString(item.EndTime)), designationId: item.DesignationId, employeeId: item.EmployeeId, eventId: item.Id });
@@ -462,7 +366,19 @@ function App() {
 
     const getEventElement = (props, element, isOvertime) => {
         let isDefaultEventEle = true;
+        let employeeName = props.Subject;
         let isDayShift = props.Description.toLowerCase().includes('day shift');
+        if (props.Subject.includes('covers for')) {
+            employeeName = props.Subject.split('covers for Dr.')[1];
+        }
+        if (props.Subject.includes('swapped')) {
+            employeeName = props.Subject.split("and")[0].trim().split("Dr.").pop(); 
+        }
+        let imageData = employeeImages.filter((item) => item.name === employeeName);
+        let imageUrl = '';
+        if (imageData.length > 0) {
+            imageUrl = imageData[0].image;
+        }
         if (isOvertime) {
             isDefaultEventEle = false;
             let isDayView = scheduleObj.current.currentView === 'TimelineDay';
@@ -658,7 +574,7 @@ function App() {
             const staffImage = document.createElement('img');
             staffImage.className = 'staff-image';
             // staffImage.textContent = props.Subject.charAt(0);
-            staffImage.src = isDayShift ? 'https://ej2.syncfusion.com/react/demos/src/schedule/images/robert.png' : 'https://ej2.syncfusion.com/react/demos/src/schedule/images/nancy.png';
+            staffImage.src = imageUrl === '' ? 'https://ej2.syncfusion.com/react/demos/src/schedule/images/alice.png' : imageUrl;
 
             // Create the staff info div
             const staffInfo = document.createElement('div');
@@ -883,13 +799,13 @@ function App() {
     const fields4 = { dataSource: staffsData, id: 'Id', text: 'Name' };
     const imageMap = {
         mark: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/will-smith.png',
-        brian: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/laura.png',
+        brian: brianImage,
         kevin: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/alice.png',
         salman: salamanImage,
         olivia: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/margaret.png',
-        zoe: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/nancy.png',
+        zoe: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/laura.png',
         ricky: rickyImage,
-        jake: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/robson.png',
+        jake: jakeImage,
     };
     const treeTemplate = (props) => {
         return (<div id="waiting">
@@ -1207,6 +1123,35 @@ function App() {
 
     loadLocalization();
 
+    const onEventClick = (args) => {
+        if (args.originalEvent.target.classList.contains('sf-icon-replace-request')) {
+            args.cancel = true;
+        }
+    }
+
+    // const getEmployeeName = (value) => {
+    //     return value.resourceData[value.resource.textField];
+    // };
+
+    // const resourceHeaderTemplate = (props) => {
+    //     if (props.resource.name === 'Roles') {
+    //         const roleImage = props.resourceData.id === 1 ? doctorImage : (props.resourceData.id === 2 ? NurseImage : StaffImage);
+    //         return (<div className="role-template-wrap">
+    //             <div className="e-role">
+    //                 <img className="role-image" src={roleImage} alt="Yours" />
+    //                 <div className="role-text">{getEmployeeName(props)}</div>
+    //             </div>
+
+    //             {/* <div className={"employee-image " + getEmployeeImage(props)} />
+    //                 <div className="employee-name"> </div>
+    //                 <div className="employee-designation">{getEmployeeDesignation(props)}</div> */}
+
+    //         </div>);
+    //     } else {
+    //         return (<div className="e-resource-text">{props.resourceData.role}</div>);
+    //     }
+    // };
+
     return (<div className='schedule-control-section'>
         <div className='e-localization'>
             <div className='e-culture'>
@@ -1254,8 +1199,10 @@ function App() {
                     timeScale={timeScale}
                     workHours={workHours}
                     showTimeIndicator={true}
+                    // showQuickInfo={false}
+                    eventClick={onEventClick}
                     eventRendered={onEventRendered}
-                  //  resourceHeaderTemplate={resourceHeaderTemplate}
+                //    resourceHeaderTemplate={resourceHeaderTemplate}
                     resizeStart={resizeStart}
                     resizing={resizing}
                     resizeStop={resizeStop}

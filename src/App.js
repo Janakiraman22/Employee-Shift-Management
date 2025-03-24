@@ -10,7 +10,6 @@ import { ChipListComponent, ChipsDirective, ChipDirective } from '@syncfusion/ej
 import salamanImage from './Avatar/salman@3x.png';
 import rickyImage from './Avatar/ricky@3x.png';
 import { ToolbarComponent, ItemsDirective, ItemDirective } from '@syncfusion/ej2-react-navigations';
-import { Query } from '@syncfusion/ej2-data';
 import { L10n, setCurrencyCode } from '@syncfusion/ej2-base';
 import { Locale } from './common/locale.ts';
 
@@ -1016,14 +1015,15 @@ function App() {
             const toolbarElement = toolbarRef.current.element;
             scheduleToolbar.appendChild(toolbarElement);
         } else {
-            scheduleObj.current.eventSettings.query.queries = [];
+            if (scheduleObj.current.eventSettings.query) {
+                scheduleObj.current.eventSettings.query.queries = [];
             if (scheduleToolbar.querySelector('.agenda-toolbar')) {
 
                 const toolbarElement = scheduleToolbar.querySelector('.agenda-toolbar');
                 if (!toolbarElement.classList.contains('e-hidden')) {
                     toolbarElement.classList.add('e-hidden');
                 }
-
+            }
             }
         }
     }

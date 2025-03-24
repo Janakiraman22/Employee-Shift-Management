@@ -9,6 +9,7 @@ import './Employee Shift Management/style.css';
 import { ChipListComponent, ChipsDirective, ChipDirective } from '@syncfusion/ej2-react-buttons';
 import salamanImage from './Avatar/salman@3x.png';
 import rickyImage from './Avatar/ricky@3x.png';
+import { Query } from '@syncfusion/ej2-data';
 import { ToolbarComponent, ItemsDirective, ItemDirective } from '@syncfusion/ej2-react-navigations';
 import { L10n, setCurrencyCode } from '@syncfusion/ej2-base';
 import { Locale } from './common/locale.ts';
@@ -994,7 +995,7 @@ function App() {
     const toolbarRef = useRef(null);
     const dropdownListRef = useRef(null);
 
-    // let [filteredQuery, setFilteredQuery] = useState(new Query());
+    let [filteredQuery, setFilteredQuery] = useState(new Query());
     let [selectedChip, setChipSelection] = useState(0);
     // let [query, setQuery] = useState(new Query().where('RoleId', 'contains', filter, true));
 
@@ -1011,6 +1012,9 @@ function App() {
     const onNavigating = (args) => {
         let scheduleToolbar = scheduleObj.current.element.querySelector('.e-schedule-toolbar-container');
         if (args.currentView === 'Agenda') {
+            setEmployeesNames([]);
+            setDdlValue('');
+            setChipSelection(0);
             enableAgendaToolbar();
             const toolbarElement = toolbarRef.current.element;
             scheduleToolbar.appendChild(toolbarElement);
@@ -1031,11 +1035,11 @@ function App() {
     const onDdlChange = (args) => {
         let employeeName = args.itemData.value;
 
-        // let query = new Query();
-        // let filter = employeeName
+        let query = new Query();
+        let filter = employeeName
 
-        // query = query.where('Subject', 'contains', filter, true);
-        // setFilteredQuery(query);
+        query = query.where('Subject', 'contains', filter, true);
+        setFilteredQuery(query);
 
         setEmployeesNames(dropdownListRef.current.dataSource);
         setDdlValue(employeeName);
@@ -1097,13 +1101,13 @@ function App() {
 
     const chipClick1 = (args) => {
 
-        // let selectedEmpData = employeeRole.find(item => item.role.indexOf(args.data.text) !== -1);
+        let selectedEmpData = employeeRole.find(item => item.role.indexOf(args.data.text) !== -1);
 
-        // let query = new Query();
-        // let filter = selectedEmpData ? selectedEmpData.id : '';
+        let query = new Query();
+        let filter = selectedEmpData ? selectedEmpData.id : '';
 
-        // query = query.where('RoleId', 'contains', filter, true);
-        // setFilteredQuery(query);
+        query = query.where('RoleId', 'contains', filter, true);
+        setFilteredQuery(query);
 
         setChipSelection(args.index);
 
@@ -1246,7 +1250,7 @@ function App() {
                     // startHour="07:00"
                     // endHour='30:59'
                     group={group}
-                    eventSettings={{ dataSource: eventData, enableMaxHeight: true, }}
+                    eventSettings={{ dataSource: eventData, enableMaxHeight: true, query: filteredQuery }}
                     timeScale={timeScale}
                     workHours={workHours}
                     showTimeIndicator={true}

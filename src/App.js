@@ -250,11 +250,7 @@ function App() {
                     }
                     return false;
                 });
-                reqEvent[0].Subject = 'Shift swapped between Dr.' + reqShift.name + ' and ' + selectedEmployee.name;
-                reqEvent[0].Description = reqEvent[0].Description.replace(' - Swap-Request', '').replace('Swap-Request', '');
-                dataSource[reqEventIndex] = reqEvent[0];
-
-
+                
                 let accEventIndex;
                 let accShiftIds = selectedShift.eventId;
                 let accEvent = dataSource.filter((item, index) => {
@@ -264,8 +260,13 @@ function App() {
                     }
                     return false;
                 });
+
+                reqEvent[0].Description = accEvent[0].Subject;
+                reqEvent[0].Subject = 'Shift swapped between Dr.' + reqShift.name + ' and ' + selectedEmployee.name;
+                dataSource[reqEventIndex] = reqEvent[0];
+
+                accEvent[0].Description = accEvent[0].Subject;
                 accEvent[0].Subject = 'Shift swapped between Dr.' + selectedEmployee.name + ' and ' + reqShift.name;
-                accEvent[0].Description = accEvent[0].Description.replace(' - Swap-Request', '').replace('Swap-Request', '');
                 dataSource[accEventIndex] = accEvent[0];
 
                 scheduleObj.current.eventSettings.dataSource = dataSource;
@@ -293,15 +294,6 @@ function App() {
     const getTimeString = (value) => {
         return intl.formatDate(value, { skeleton: 'h' });
     }
-
-    const getDate = (value) => {
-        return parseInt(intl.formatDate(value, { skeleton: 'd' }), 10);
-    }
-
-    // const getTime = () => {
-    //     return intl.formatDate(value, { skeleton: 'H' });
-    // }
-
 
     const [shiftsData, setShiftsData] = useState([]);
 
@@ -347,200 +339,18 @@ function App() {
 
     const getEventElement = (props, element, isOvertime) => {
         let isDefaultEventEle = true;
+        let isSwappedEvent = props.Subject.includes('swapped');
         let employeeName = props.Subject;
-        let isDayShift = props.Description.toLowerCase().includes('day shift');
         if (props.Subject.includes('covers for')) {
             employeeName = props.Subject.split('covers for Dr.')[1];
         }
-        if (props.Subject.includes('swapped')) {
-            employeeName = props.Subject.split("and")[0].trim().split("Dr.").pop();
+        if (isSwappedEvent) {
+            employeeName = props.Description;
         }
         let imageData = employeeImages.filter((item) => item.name === employeeName);
         let imageUrl = '';
         if (imageData.length > 0) {
             imageUrl = imageData[0].image;
-        }
-        if (isOvertime) {
-            isDefaultEventEle = false;
-            let isDayView = scheduleObj.current.currentView === 'TimelineDay';
-
-            let eventEleWidth = parseFloat(element.style.width, 10) + 4;
-
-            var startTime = props.StartTime;
-            var endTime = props.EndTime;
-
-            // Get time difference in milliseconds
-            var timeDifference = endTime.getTime() - startTime.getTime();
-            var differenceInHours = timeDifference / (1000 * 60 * 60);
-
-
-            // Get midnight of the next day
-            var midnight = new Date(startTime);
-            midnight.setHours(24, 0, 0, 0); // Midnight of next day
-
-            var hoursOnStartDay, hoursOnNextDay;
-
-            if (endTime <= midnight) {
-                // Case 1: End time is still on the same day
-                hoursOnStartDay = differenceInHours;
-                hoursOnNextDay = 0;
-            } else {
-                // Case 2: End time goes to the next day
-                hoursOnStartDay = (midnight.getTime() - startTime.getTime()) / (1000 * 60 * 60);
-                hoursOnNextDay = (endTime.getTime() - midnight.getTime()) / (1000 * 60 * 60);
-            }
-            var isOnlyOvertime = false;
-            var currentHours = differenceInHours;
-
-            if (isDayView) {
-                currentHours = isDayShift ? (differenceInHours - hoursOnNextDay) : (differenceInHours - hoursOnStartDay);
-
-                let eventEleDate = getDate(scheduleObj.current.selectedDate);
-                let eventModelDate = props.StartTime.getDate();
-                if (isDayShift) {
-                    if (eventEleDate !== eventModelDate) {
-                        isOnlyOvertime = true;
-                    }
-                } else {
-                    if (eventEleDate === eventModelDate) {
-                        isDefaultEventEle = true;
-                    }
-
-                }
-
-            }
-            if (!isDefaultEventEle) {
-
-                var eleWidthPerHour = eventEleWidth / currentHours;
-
-                var dayShift = 12;
-                var nighShift = isDayView ? 7 : 12;
-                var overShift = (isDayShift ? currentHours - dayShift : currentHours - nighShift);
-                var nrmlShift = isDayShift ? dayShift : nighShift;
-                var eventsContIconEleSize = 17;
-
-                var nrmlShiftTime = Math.round((nrmlShift * eleWidthPerHour));
-                var overShiftTime = Math.round((overShift * eleWidthPerHour)) + (isDayShift ? 0 : (isDayView ? eventsContIconEleSize : 0));
-
-                if (isOnlyOvertime) {
-                    element.classList.add('ot-conts');
-                    const templateWrap = document.createElement('div');
-                    templateWrap.className = 'template-wrap';
-
-                    // Create the staff container div
-                    const staffWrap = document.createElement('div');
-                    staffWrap.className = 'e-staff';
-
-                    // Create the staff info div
-                    const staffInfo = document.createElement('div');
-                    staffInfo.className = 'staff-info';
-
-                    // Create and append the staff name
-                    const name = document.createElement('div');
-                    name.className = 'e-name';
-                    name.innerHTML = 'Overtime Shift';
-
-                    // Create and append the staff designation
-                    const designation = document.createElement('div');
-                    designation.className = 'e-designation';
-                    designation.textContent = props.Subject
-
-                    // Append name and designation to staffInfo
-                    staffInfo.appendChild(name);
-                    staffInfo.appendChild(designation);
-
-                    // Append staffImage and staffInfo to staffWrap
-                    staffWrap.appendChild(staffInfo);
-
-                    // Create the time display div
-                    const timeDiv = document.createElement('div');
-                    timeDiv.className = 'e-time';
-                    timeDiv.textContent = `Shift Time: ${getTimeString(props.StartTime)} - ${getTimeString(props.EndTime)}`;
-
-                    // Append staffWrap and timeDiv to templateWrap
-                    templateWrap.appendChild(staffWrap);
-                    templateWrap.appendChild(timeDiv);
-
-                    // Return the full element
-                    return templateWrap;
-
-                }
-
-
-                console.log(scheduleObj.current.selectedDate);
-                // Create the main wrapper div
-                const templateWrap = document.createElement('div');
-                templateWrap.className = 'template-wrap overtime';
-
-                const shiftEle = document.createElement('span');
-                shiftEle.className = 'shift-part';
-                shiftEle.style.width = nrmlShiftTime + 'px';
-
-                const overtimeEle = document.createElement('span');
-                overtimeEle.className = 'overtime-part';
-                overtimeEle.style.width = overShiftTime + 'px';
-
-                for (let idx = 0; idx < 2; idx++) {
-                    // Create the staff container div
-                    const staffWrap = document.createElement('div');
-                    staffWrap.className = 'e-staff';
-
-                    if (idx === 0) {
-                        // Create the staff image div
-                        const staffImage = document.createElement('div');
-                        staffImage.className = 'staff-image';
-                        staffImage.textContent = props.Subject.charAt(0);
-                        staffWrap.appendChild(staffImage);
-
-                    }
-
-                    // Create the staff info div
-                    const staffInfo = document.createElement('div');
-                    staffInfo.className = 'staff-info';
-
-                    // Create and append the staff name
-                    const name = document.createElement('div');
-                    name.className = 'e-name';
-                    name.innerHTML = idx === 1 ? 'Overtime Shift' : props.Subject;
-
-                    // Create and append the staff designation
-                    const designation = document.createElement('div');
-                    designation.className = 'e-designation';
-                    designation.textContent = idx === 1 ? props.Subject : props.Designation;
-
-                    // Append name and designation to staffInfo
-                    staffInfo.appendChild(name);
-                    staffInfo.appendChild(designation);
-
-                    // Append staffImage and staffInfo to staffWrap
-
-                    staffWrap.appendChild(staffInfo);
-
-                    // Create the time display div
-                    const timeDiv = document.createElement('div');
-                    timeDiv.className = 'e-time';
-                    timeDiv.textContent = `Shift Time: ${getTimeString(props.StartTime)} - ${getTimeString(props.EndTime)}`;
-
-                    if (idx === 0) {
-                        shiftEle.appendChild(staffWrap);
-                        shiftEle.appendChild(timeDiv);
-                    } else {
-                        overtimeEle.appendChild(staffWrap);
-                        overtimeEle.appendChild(timeDiv);
-                    }
-                    // Append staffWrap and timeDiv to templateWrap
-
-
-                }
-                templateWrap.appendChild(shiftEle);
-                templateWrap.appendChild(overtimeEle);
-
-
-
-                // Return the full element
-                return templateWrap;
-            }
-
         }
         if (isDefaultEventEle) {
             // Create the main wrapper div
@@ -564,7 +374,7 @@ function App() {
             // Create and append the staff name
             const name = document.createElement('div');
             name.className = 'e-name';
-            name.innerHTML = props.Description.toLowerCase().includes('leave') && !props.Subject.toLowerCase().includes('covers') ? props.Description.split('(')[0].trim() : props.Subject;
+            name.innerHTML = props.Description.toLowerCase().includes('leave') && !props.Subject.toLowerCase().includes('covers') ? props.Description.split('(')[0].trim() : (isSwappedEvent ? props.Description : props.Subject);
 
             // Create and append the staff designation
             const designation = document.createElement('div');
@@ -1182,7 +992,6 @@ function App() {
     //         return (<div className="e-resource-text">{props.resourceData.role}</div>);
     //     }
     // };
-
 
     return (<div className='schedule-control-section'>
         <div className='e-localization'>

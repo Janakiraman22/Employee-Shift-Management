@@ -1,4 +1,6 @@
 import './App.css';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { useRef, useState } from 'react';
 import { ScheduleComponent, TimelineViews, Inject, TimelineMonth, ResourceDirective, ResourcesDirective, ViewsDirective, ViewDirective, Resize, DragAndDrop, Agenda } from '@syncfusion/ej2-react-schedule';
 import { closest, remove, addClass, Internationalization } from '@syncfusion/ej2-base';
@@ -10,32 +12,25 @@ import { ChipListComponent, ChipsDirective, ChipDirective } from '@syncfusion/ej
 import salamanImage from './Avatar/salman@3x.png';
 import brianImage from './Avatar/brian@3x.png';
 import jakeImage from './Avatar/jake@3x.png';
-
 import jenniferImage from './Avatar/Jennifer.png';
 import davidImage from './Avatar/David.png';
 import williammImage from './Avatar/William.png';
-
 import emmaImage from './Avatar/Emma.png';
 import lilyImage from './Avatar/Lily.png';
 import avaImage from './Avatar/Ava.png';
 import graceImage from './Avatar/Grace.png';
-
 import michaelImage from './Avatar/Michael.png';
 import thomasImage from './Avatar/Thomas.png';
-
 import rickyImage from './Avatar/Ricky.png';
-
 import jamesImage from './Avatar/James.png';
 import benjaminImage from './Avatar/Benjamin.png';
 import oliviaImage from './Avatar/Olivia.png';
 import chloeImage from './Avatar/Chloe.png';
-
-
 import { Query } from '@syncfusion/ej2-data';
 import { ToolbarComponent, ItemsDirective, ItemDirective } from '@syncfusion/ej2-react-navigations';
 import { L10n, setCurrencyCode } from '@syncfusion/ej2-base';
 import { Locale } from './common/locale.ts';
-
+import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 const employeeRole = [
     { role: 'Doctors', id: 1 },
@@ -83,8 +78,7 @@ const intl = new Internationalization();
 let eventData = [
     { Id: 1, RoleId: 1, DesignationId: 1, EmployeeId: 1, Subject: "John", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 2, RoleId: 1, DesignationId: 1, EmployeeId: 2, Subject: "Nashil", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
-    { Id: 3, RoleId: 1, DesignationId: 1, EmployeeId: 1, Subject: "John", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T07:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
-    { Id: 113, RoleId: 1, DesignationId: 1, EmployeeId: 1, Subject: "John", StartTime: new Date("2025-03-03T07:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
+    { Id: 3, RoleId: 1, DesignationId: 1, EmployeeId: 1, Subject: "John", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 4, RoleId: 1, DesignationId: 1, EmployeeId: 2, Subject: "Nashil", StartTime: new Date("2025-03-03T13:30:00.000Z"), EndTime: new Date("2025-03-04T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
     { Id: 5, RoleId: 1, DesignationId: 1, EmployeeId: 1, Subject: "John", StartTime: new Date("2025-03-04T01:30:00.000Z"), EndTime: new Date("2025-03-04T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 6, RoleId: 1, DesignationId: 1, EmployeeId: 2, Subject: "Nashil", StartTime: new Date("2025-03-04T13:30:00.000Z"), EndTime: new Date("2025-03-05T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
@@ -93,9 +87,8 @@ let eventData = [
     { Id: 9, RoleId: 1, DesignationId: 1, EmployeeId: 1, Subject: "John", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
     { Id: 10, RoleId: 1, DesignationId: 1, EmployeeId: 2, Subject: "Nashil", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 11, RoleId: 1, DesignationId: 1, EmployeeId: 1, Subject: "John", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 12, RoleId: 1, DesignationId: 1, EmployeeId: 2, Subject: "Nashil", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },    
+    { Id: 12, RoleId: 1, DesignationId: 1, EmployeeId: 2, Subject: "Nashil", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
     { Id: 13, RoleId: 1, DesignationId: 1, EmployeeId: 1, Subject: "John", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 14, RoleId: 1, DesignationId: 1, EmployeeId: 2, Subject: "Nashil", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
 
     { Id: 15, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 16, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
@@ -107,11 +100,10 @@ let eventData = [
     { Id: 22, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
     { Id: 23, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 24, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
-    { Id: 25, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
-    { Id: 26, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
-    { Id: 27, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 28, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
-    
+    { Id: 25, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
+    { Id: 26, RoleId: 1, DesignationId: 2, EmployeeId: 4, Subject: "William", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
+    { Id: 27, RoleId: 1, DesignationId: 2, EmployeeId: 3, Subject: "Jennifer", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
+
     { Id: 29, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 30, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
     { Id: 31, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
@@ -123,10 +115,9 @@ let eventData = [
     { Id: 37, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 38, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
     { Id: 39, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 40, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
+    { Id: 40, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 41, RoleId: 1, DesignationId: 3, EmployeeId: 5, Subject: "David", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
-    { Id: 42, RoleId: 1, DesignationId: 3, EmployeeId: 6, Subject: "Michael", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
-    
+
     { Id: 43, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 44, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
     { Id: 45, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
@@ -137,12 +128,9 @@ let eventData = [
     { Id: 50, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-05T13:30:00.000Z"), EndTime: new Date("2025-03-06T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 51, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 52, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Leave (Night Shift)" },
-    { Id: 53, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
-    { Id: 54, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
+    { Id: 53, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
+    { Id: 54, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 55, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 56, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
-    
-    
 
 
 
@@ -157,9 +145,8 @@ let eventData = [
     { Id: 65, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
     { Id: 66, RoleId: 2, DesignationId: 5, EmployeeId: 10, Subject: "Lily", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 67, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 68, RoleId: 2, DesignationId: 5, EmployeeId: 10, Subject: "Lily", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
+    { Id: 68, RoleId: 2, DesignationId: 5, EmployeeId: 10, Subject: "Lily", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
     { Id: 115, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Leave (Day Shift)" },
-    { Id: 70, RoleId: 2, DesignationId: 5, EmployeeId: 10, Subject: "Lily", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
 
     { Id: 71, RoleId: 2, DesignationId: 6, EmployeeId: 11, Subject: "Ava", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 72, RoleId: 2, DesignationId: 6, EmployeeId: 12, Subject: "Grace", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
@@ -172,12 +159,8 @@ let eventData = [
     { Id: 79, RoleId: 2, DesignationId: 6, EmployeeId: 11, Subject: "Ava", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 80, RoleId: 2, DesignationId: 6, EmployeeId: 12, Subject: "Grace", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 81, RoleId: 2, DesignationId: 6, EmployeeId: 11, Subject: "Ava", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 82, RoleId: 2, DesignationId: 6, EmployeeId: 12, Subject: "Grace", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },    
+    { Id: 82, RoleId: 2, DesignationId: 6, EmployeeId: 12, Subject: "Grace", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 83, RoleId: 2, DesignationId: 6, EmployeeId: 11, Subject: "Ava", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 84, RoleId: 2, DesignationId: 6, EmployeeId: 12, Subject: "Grace", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
-
-
-
 
 
     { Id: 85, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
@@ -191,9 +174,8 @@ let eventData = [
     { Id: 93, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 94, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 95, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 96, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Leave (Night Shift)" },    
+    { Id: 96, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Leave (Night Shift)" },
     { Id: 97, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 98, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
 
     { Id: 99, RoleId: 3, DesignationId: 8, EmployeeId: 15, Subject: "Olivia", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 100, RoleId: 3, DesignationId: 8, EmployeeId: 16, Subject: "Chloe", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
@@ -206,9 +188,8 @@ let eventData = [
     { Id: 107, RoleId: 3, DesignationId: 8, EmployeeId: 15, Subject: "Olivia", StartTime: new Date("2025-03-06T01:30:00.000Z"), EndTime: new Date("2025-03-06T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 108, RoleId: 3, DesignationId: 8, EmployeeId: 16, Subject: "Chloe", StartTime: new Date("2025-03-06T13:30:00.000Z"), EndTime: new Date("2025-03-07T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 109, RoleId: 3, DesignationId: 8, EmployeeId: 15, Subject: "Olivia", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
-    { Id: 110, RoleId: 3, DesignationId: 8, EmployeeId: 16, Subject: "Chloe", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },    
+    { Id: 110, RoleId: 3, DesignationId: 8, EmployeeId: 16, Subject: "Chloe", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift - Swap-Request)" },
     { Id: 111, RoleId: 3, DesignationId: 8, EmployeeId: 15, Subject: "Olivia", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift - Swap-Request)" },
-    { Id: 112, RoleId: 3, DesignationId: 8, EmployeeId: 16, Subject: "Chloe", StartTime: new Date("2025-03-08T13:30:00.000Z"), EndTime: new Date("2025-03-09T01:30:00.000Z"), Description: "Available (Night Shift)" },
 ];
 
 const group = {
@@ -217,7 +198,7 @@ const group = {
 
 const majorSlotTemplate = (props) => {
     return (<div>{intl.formatDate(props.date, { skeleton: 'hm' }) === '12:00 AM' ? 'Day Shift' : 'Night Shift'}</div>);
-  }
+}
 
 const timeScale = {
     enable: true,
@@ -327,7 +308,7 @@ function App() {
     // Function to Handle Shift Swap Request
     function requestShiftSwap(args) {
         const eventsData = scheduleObj.current.eventSettings.dataSource;
-        const eventDetails = scheduleObj.current.getEventDetails(closest(args.target, '.e-appointment'));
+        const eventDetails = scheduleObj.current.getEventDetails((args.element));
         const roleId = eventDetails.RoleId;
         const designationId = eventDetails.DesignationId;
         const employeeName = eventDetails.Subject;
@@ -357,7 +338,7 @@ function App() {
             assignShift(shiftColl);
             setEmployee(args.itemData);
         }
-        
+
     }
 
     const dropDownListChange2 = (args) => {
@@ -372,7 +353,7 @@ function App() {
             employeeName = props.Subject.split('covers for Dr.')[1];
         }
         if (props.Subject.includes('swapped')) {
-            employeeName = props.Subject.split("and")[0].trim().split("Dr.").pop(); 
+            employeeName = props.Subject.split("and")[0].trim().split("Dr.").pop();
         }
         let imageData = employeeImages.filter((item) => item.name === employeeName);
         let imageUrl = '';
@@ -412,11 +393,11 @@ function App() {
             var currentHours = differenceInHours;
 
             if (isDayView) {
-                currentHours = isDayShift ? (differenceInHours - hoursOnNextDay) :  (differenceInHours - hoursOnStartDay);
+                currentHours = isDayShift ? (differenceInHours - hoursOnNextDay) : (differenceInHours - hoursOnStartDay);
 
                 let eventEleDate = getDate(scheduleObj.current.selectedDate);
                 let eventModelDate = props.StartTime.getDate();
-                if (isDayShift){
+                if (isDayShift) {
                     if (eventEleDate !== eventModelDate) {
                         isOnlyOvertime = true;
                     }
@@ -430,135 +411,135 @@ function App() {
             }
             if (!isDefaultEventEle) {
 
-            var eleWidthPerHour = eventEleWidth / currentHours;
+                var eleWidthPerHour = eventEleWidth / currentHours;
 
-            var dayShift = 12;
-            var nighShift = isDayView ? 7 : 12;
-            var overShift = (isDayShift ? currentHours - dayShift : currentHours - nighShift);
-            var nrmlShift = isDayShift ? dayShift : nighShift;
-            var eventsContIconEleSize = 17;
+                var dayShift = 12;
+                var nighShift = isDayView ? 7 : 12;
+                var overShift = (isDayShift ? currentHours - dayShift : currentHours - nighShift);
+                var nrmlShift = isDayShift ? dayShift : nighShift;
+                var eventsContIconEleSize = 17;
 
-            var nrmlShiftTime = Math.round(( nrmlShift * eleWidthPerHour));
-            var overShiftTime = Math.round((overShift * eleWidthPerHour)) + (isDayShift ? 0 :( isDayView ? eventsContIconEleSize : 0) );
+                var nrmlShiftTime = Math.round((nrmlShift * eleWidthPerHour));
+                var overShiftTime = Math.round((overShift * eleWidthPerHour)) + (isDayShift ? 0 : (isDayView ? eventsContIconEleSize : 0));
 
-            if (isOnlyOvertime) {
-                element.classList.add('ot-conts');
+                if (isOnlyOvertime) {
+                    element.classList.add('ot-conts');
+                    const templateWrap = document.createElement('div');
+                    templateWrap.className = 'template-wrap';
+
+                    // Create the staff container div
+                    const staffWrap = document.createElement('div');
+                    staffWrap.className = 'e-staff';
+
+                    // Create the staff info div
+                    const staffInfo = document.createElement('div');
+                    staffInfo.className = 'staff-info';
+
+                    // Create and append the staff name
+                    const name = document.createElement('div');
+                    name.className = 'e-name';
+                    name.innerHTML = 'Overtime Shift';
+
+                    // Create and append the staff designation
+                    const designation = document.createElement('div');
+                    designation.className = 'e-designation';
+                    designation.textContent = props.Subject
+
+                    // Append name and designation to staffInfo
+                    staffInfo.appendChild(name);
+                    staffInfo.appendChild(designation);
+
+                    // Append staffImage and staffInfo to staffWrap
+                    staffWrap.appendChild(staffInfo);
+
+                    // Create the time display div
+                    const timeDiv = document.createElement('div');
+                    timeDiv.className = 'e-time';
+                    timeDiv.textContent = `Shift Time: ${getTimeString(props.StartTime)} - ${getTimeString(props.EndTime)}`;
+
+                    // Append staffWrap and timeDiv to templateWrap
+                    templateWrap.appendChild(staffWrap);
+                    templateWrap.appendChild(timeDiv);
+
+                    // Return the full element
+                    return templateWrap;
+
+                }
+
+
+                console.log(scheduleObj.current.selectedDate);
+                // Create the main wrapper div
                 const templateWrap = document.createElement('div');
-                templateWrap.className = 'template-wrap';
+                templateWrap.className = 'template-wrap overtime';
 
-                // Create the staff container div
-                const staffWrap = document.createElement('div');
-                staffWrap.className = 'e-staff';
+                const shiftEle = document.createElement('span');
+                shiftEle.className = 'shift-part';
+                shiftEle.style.width = nrmlShiftTime + 'px';
 
-                // Create the staff info div
-                const staffInfo = document.createElement('div');
-                staffInfo.className = 'staff-info';
+                const overtimeEle = document.createElement('span');
+                overtimeEle.className = 'overtime-part';
+                overtimeEle.style.width = overShiftTime + 'px';
 
-                // Create and append the staff name
-                const name = document.createElement('div');
-                name.className = 'e-name';
-                name.innerHTML = 'Overtime Shift';
+                for (let idx = 0; idx < 2; idx++) {
+                    // Create the staff container div
+                    const staffWrap = document.createElement('div');
+                    staffWrap.className = 'e-staff';
 
-                // Create and append the staff designation
-                const designation = document.createElement('div');
-                designation.className = 'e-designation';
-                designation.textContent = props.Subject
+                    if (idx === 0) {
+                        // Create the staff image div
+                        const staffImage = document.createElement('div');
+                        staffImage.className = 'staff-image';
+                        staffImage.textContent = props.Subject.charAt(0);
+                        staffWrap.appendChild(staffImage);
 
-                // Append name and designation to staffInfo
-                staffInfo.appendChild(name);
-                staffInfo.appendChild(designation);
+                    }
 
-                // Append staffImage and staffInfo to staffWrap
-                staffWrap.appendChild(staffInfo);
+                    // Create the staff info div
+                    const staffInfo = document.createElement('div');
+                    staffInfo.className = 'staff-info';
 
-                // Create the time display div
-                const timeDiv = document.createElement('div');
-                timeDiv.className = 'e-time';
-                timeDiv.textContent = `Shift Time: ${getTimeString(props.StartTime)} - ${getTimeString(props.EndTime)}`;
+                    // Create and append the staff name
+                    const name = document.createElement('div');
+                    name.className = 'e-name';
+                    name.innerHTML = idx === 1 ? 'Overtime Shift' : props.Subject;
 
-                // Append staffWrap and timeDiv to templateWrap
-                templateWrap.appendChild(staffWrap);
-                templateWrap.appendChild(timeDiv);
+                    // Create and append the staff designation
+                    const designation = document.createElement('div');
+                    designation.className = 'e-designation';
+                    designation.textContent = idx === 1 ? props.Subject : props.Designation;
+
+                    // Append name and designation to staffInfo
+                    staffInfo.appendChild(name);
+                    staffInfo.appendChild(designation);
+
+                    // Append staffImage and staffInfo to staffWrap
+
+                    staffWrap.appendChild(staffInfo);
+
+                    // Create the time display div
+                    const timeDiv = document.createElement('div');
+                    timeDiv.className = 'e-time';
+                    timeDiv.textContent = `Shift Time: ${getTimeString(props.StartTime)} - ${getTimeString(props.EndTime)}`;
+
+                    if (idx === 0) {
+                        shiftEle.appendChild(staffWrap);
+                        shiftEle.appendChild(timeDiv);
+                    } else {
+                        overtimeEle.appendChild(staffWrap);
+                        overtimeEle.appendChild(timeDiv);
+                    }
+                    // Append staffWrap and timeDiv to templateWrap
+
+
+                }
+                templateWrap.appendChild(shiftEle);
+                templateWrap.appendChild(overtimeEle);
+
+
 
                 // Return the full element
                 return templateWrap;
-
             }
-
-
-            console.log(scheduleObj.current.selectedDate);
-            // Create the main wrapper div
-            const templateWrap = document.createElement('div');
-            templateWrap.className = 'template-wrap overtime';
-
-            const shiftEle = document.createElement('span');
-            shiftEle.className = 'shift-part';
-            shiftEle.style.width = nrmlShiftTime + 'px';
-
-            const overtimeEle = document.createElement('span');
-            overtimeEle.className = 'overtime-part';
-            overtimeEle.style.width = overShiftTime + 'px';
-
-            for (let idx = 0; idx < 2; idx++) {
-                // Create the staff container div
-                const staffWrap = document.createElement('div');
-                staffWrap.className = 'e-staff';
-
-                if (idx === 0) {
-                    // Create the staff image div
-                    const staffImage = document.createElement('div');
-                    staffImage.className = 'staff-image';
-                    staffImage.textContent = props.Subject.charAt(0);
-                    staffWrap.appendChild(staffImage);
-
-                }
-
-                // Create the staff info div
-                const staffInfo = document.createElement('div');
-                staffInfo.className = 'staff-info';
-
-                // Create and append the staff name
-                const name = document.createElement('div');
-                name.className = 'e-name';
-                name.innerHTML = idx === 1 ? 'Overtime Shift' : props.Subject;
-
-                // Create and append the staff designation
-                const designation = document.createElement('div');
-                designation.className = 'e-designation';
-                designation.textContent = idx === 1 ? props.Subject : props.Designation;
-
-                // Append name and designation to staffInfo
-                staffInfo.appendChild(name);
-                staffInfo.appendChild(designation);
-
-                // Append staffImage and staffInfo to staffWrap
-
-                staffWrap.appendChild(staffInfo);
-
-                // Create the time display div
-                const timeDiv = document.createElement('div');
-                timeDiv.className = 'e-time';
-                timeDiv.textContent = `Shift Time: ${getTimeString(props.StartTime)} - ${getTimeString(props.EndTime)}`;
-
-                if (idx === 0) {
-                    shiftEle.appendChild(staffWrap);
-                    shiftEle.appendChild(timeDiv);
-                } else {
-                    overtimeEle.appendChild(staffWrap);
-                    overtimeEle.appendChild(timeDiv);
-                }
-                // Append staffWrap and timeDiv to templateWrap
-
-
-            }
-            templateWrap.appendChild(shiftEle);
-            templateWrap.appendChild(overtimeEle);
-
-
-
-            // Return the full element
-            return templateWrap;
-        }
 
         }
         if (isDefaultEventEle) {
@@ -606,6 +587,8 @@ function App() {
         }
     };
 
+    let tooltipInstance = useRef(null);
+
     const onEventRendered = (args) => {
         let startTime = getTimeString(args.data.StartTime);
         if (startTime === '7 AM' || startTime === '1 PM') {
@@ -635,11 +618,37 @@ function App() {
         if (args.data.Description.toLowerCase().includes('leave')) {
             args.element.classList.add('event-leave');
 
-            let iconElement = document.createElement('span');
-            iconElement.classList.add('e-leave');
-            iconElement.classList.add('e-icons');
+            // Create a container div for React rendering
+            const reactContainer = document.createElement('span');
+            reactContainer.className = "e-icon-element";
+            args.element.appendChild(reactContainer);
 
-            args.element.appendChild(iconElement);
+            
+
+            const beforeRender = (args) => {
+                console.log(tooltipInstance);
+                tooltipInstance.current.offsetX = -20;
+                debugger;
+            }
+
+            // Define the icon with tooltip using React
+            const LeaveIconWithTooltip = () => {
+                const iconRef = React.useRef(null);
+                let employeeName = args.data.Subject;
+                return (
+                    <TooltipComponent ref={tooltipInstance} beforeRender={beforeRender} content= {`${employeeName} is on leave. To cover this shift, drag a staff member with the same designation from the available list and drop them here.`} position="RightCenter">
+                        <span
+                            ref={iconRef}
+                            className="e-leave e-icons"
+                            style={{ 
+                                cursor: 'pointer'
+                             }}
+                        ></span>
+                    </TooltipComponent>
+                );
+            };
+            // Render Tooltip + Icon inside Scheduler event
+            ReactDOM.createRoot(reactContainer).render(<LeaveIconWithTooltip />);
         }
         if (args.data.Subject.includes('covers for')) {
             args.element.classList.add('e-covers');
@@ -657,18 +666,47 @@ function App() {
         }
         if (args.data.Description.toLowerCase().includes('swap-request') && !args.data.Subject.toLowerCase().includes('swapped') && scheduleObj.current.currentView !== 'Agenda') {
             args.element.classList.add('event-swap');
-            let iconElement = document.createElement('span');
-            iconElement.classList.add('e-swap');
-            iconElement.classList.add('e-icons');
-            iconElement.classList.add('sf-icon-replace-request');
 
-            iconElement.addEventListener('click', (args) => {
-                if (args.target.classList.contains('sf-icon-replace-request')) {
-                    requestShiftSwap(args);
-                }
-            });
+            // Create a container div for React rendering
+            const reactContainer = document.createElement('span');
+            reactContainer.className = "e-icon-element";
+            args.element.appendChild(reactContainer);
 
-            args.element.appendChild(iconElement);
+            // Define the icon with tooltip using React
+            const SwapIconWithTooltip = () => {
+                const iconRef = React.useRef(null);
+                React.useEffect(() => {
+                    const el = iconRef.current;
+                    if (el) {
+                        el.addEventListener('click', (event) => {
+                            if (event.target.classList.contains('sf-icon-replace-request')) {
+                                requestShiftSwap(args);
+                            }
+                        });
+                    }
+
+                    // Cleanup
+                    return () => {
+                        if (el) {
+                            el.removeEventListener('click', requestShiftSwap);
+                        }
+                    };
+                }, []);
+
+                return (
+                    <TooltipComponent content="Click here to swap shift" position="RightCenter">
+                        <span
+                            ref={iconRef}
+                            className="e-swap e-icons sf-icon-replace-request"
+                            style={{ 
+                                cursor: 'pointer', marginLeft: '5px'
+                             }}
+                        ></span>
+                    </TooltipComponent>
+                );
+            };
+            // Render Tooltip + Icon inside Scheduler event
+            ReactDOM.createRoot(reactContainer).render(<SwapIconWithTooltip />);
         }
         if (args.data.Subject.toLowerCase().includes('swapped')) {
             if (args.element.classList.contains('event-swap')) {
@@ -682,13 +720,6 @@ function App() {
             iconElement.classList.add('sf-icon-replace-accepted');
             args.element.appendChild(iconElement);
 
-            // const leaveElement = args.element.querySelector('.e-swap');
-            // if (leaveElement) {
-            //     // Add classes to the element
-            //     leaveElement.classList.add('e-swapped', '');
-            //     // Remove the 'e-leave' class
-            //     leaveElement.classList.remove('e-swap', 'sf-icon-replace-request');
-            // }
         }
 
         if (args.element.classList.contains('day-shift') && args.element.classList.contains('e-overtime') && args.element.querySelector('.e-right-icon')) {
@@ -937,13 +968,13 @@ function App() {
         } else {
             if (scheduleObj.current.eventSettings.query) {
                 scheduleObj.current.eventSettings.query.queries = [];
-            if (scheduleToolbar.querySelector('.agenda-toolbar')) {
+                if (scheduleToolbar.querySelector('.agenda-toolbar')) {
 
-                const toolbarElement = scheduleToolbar.querySelector('.agenda-toolbar');
-                if (!toolbarElement.classList.contains('e-hidden')) {
-                    toolbarElement.classList.add('e-hidden');
+                    const toolbarElement = scheduleToolbar.querySelector('.agenda-toolbar');
+                    if (!toolbarElement.classList.contains('e-hidden')) {
+                        toolbarElement.classList.add('e-hidden');
+                    }
                 }
-            }
             }
         }
     }
@@ -1152,6 +1183,7 @@ function App() {
     //     }
     // };
 
+
     return (<div className='schedule-control-section'>
         <div className='e-localization'>
             <div className='e-culture'>
@@ -1202,7 +1234,7 @@ function App() {
                     // showQuickInfo={false}
                     eventClick={onEventClick}
                     eventRendered={onEventRendered}
-                //    resourceHeaderTemplate={resourceHeaderTemplate}
+                    //    resourceHeaderTemplate={resourceHeaderTemplate}
                     resizeStart={resizeStart}
                     resizing={resizing}
                     resizeStop={resizeStop}
@@ -1213,9 +1245,7 @@ function App() {
                 >
 
                     <ViewsDirective>
-                        <ViewDirective option='TimelineDay' />
                         <ViewDirective option="TimelineWeek" />
-                        <ViewDirective option='TimelineMonth' readonly={true} />
                         <ViewDirective option='Agenda' eventTemplate={agendaTemplate} />
                     </ViewsDirective>
 
@@ -1292,7 +1322,6 @@ function App() {
                     </ItemsDirective>
                 </ToolbarComponent>
             </div>
-
         </div>
     </div>
     );

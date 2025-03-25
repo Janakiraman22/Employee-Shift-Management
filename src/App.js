@@ -524,12 +524,28 @@ function App() {
             }
             args.element.classList.add('event-swapped');
 
-            let iconElement = document.createElement('span');
-            iconElement.classList.add('e-swapped');
-            iconElement.classList.add('e-icons');
-            iconElement.classList.add('sf-icon-replace-accepted');
-            args.element.appendChild(iconElement);
+            // Create a container div for React rendering
+            const reactContainer = document.createElement('span');
+            reactContainer.className = "e-icon-element";
+            args.element.appendChild(reactContainer);
 
+            // Define the icon with tooltip using React
+            const ShiftSwappedIconWithTooltip = () => {
+                const iconRef = React.useRef(null);
+                return (
+                    <TooltipComponent content='This shift has been swapped'  position="RightCenter">
+                        <span
+                            ref={iconRef}
+                            className="e-swapped e-icons sf-icon-replace-accepted"
+                            style={{ 
+                                cursor: 'pointer'
+                             }}
+                        ></span>
+                    </TooltipComponent>
+                );
+            };
+            // Render Tooltip + Icon inside Scheduler event
+            ReactDOM.createRoot(reactContainer).render(<ShiftSwappedIconWithTooltip />);
         }
 
         if (args.element.classList.contains('day-shift') && args.element.classList.contains('e-overtime') && args.element.querySelector('.e-right-icon')) {

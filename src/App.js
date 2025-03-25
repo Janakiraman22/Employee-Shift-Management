@@ -262,11 +262,11 @@ function App() {
                 });
 
                 reqEvent[0].Description = accEvent[0].Subject;
-                reqEvent[0].Subject = 'Shift swapped between Dr.' + reqShift.name + ' and ' + selectedEmployee.name;
+                reqEvent[0].Subject = 'Shift swapped between ' + reqShift.name + ' and ' + selectedEmployee.name;
                 dataSource[reqEventIndex] = reqEvent[0];
 
                 accEvent[0].Description = accEvent[0].Subject;
-                accEvent[0].Subject = 'Shift swapped between Dr.' + selectedEmployee.name + ' and ' + reqShift.name;
+                accEvent[0].Subject = 'Shift swapped between ' + selectedEmployee.name + ' and ' + reqShift.name;
                 dataSource[accEventIndex] = accEvent[0];
 
                 scheduleObj.current.eventSettings.dataSource = dataSource;
@@ -992,6 +992,7 @@ function App() {
     //         return (<div className="e-resource-text">{props.resourceData.role}</div>);
     //     }
     // };
+
 
     return (<div className='schedule-control-section'>
         <div className='e-localization'>

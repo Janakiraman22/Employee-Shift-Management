@@ -1120,7 +1120,16 @@ function App() {
                     <TreeViewComponent ref={treeObj4} enableRtl={isRtl} id="treeview4" cssClass='treeview-external-drag' style={styleNone} dragArea=".drag-sample-wrapper" nodeTemplate={treeTemplate} fields={fields4} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
                 </div>
             </div>
-            <div id="target" className="col-lg-8">
+            <div>
+                <ToolbarComponent ref={toolbarRef} enableRtl={isRtl} cssClass={`agenda-toolbar ${scheduleObj.currentView !== "Agenda" ? 'e-hidden' : ''}`}>
+                    <ItemsDirective>
+                        <ItemDirective cssClass='tooltip-chips' type="Input" template={getChips} overflow="Show" align="Left" />
+                        <ItemDirective cssClass='tooltip-ddl' type="Input" template={getDdl} overflow="Show" align="Right" />
+                    </ItemsDirective>
+                </ToolbarComponent>
+            </div>
+        </div>
+        <div id="target" className="col-lg-8">
                 <DialogComponent ref={dialogInstance} enableRtl={isRtl} id="modalDialog" cssClass='swap-dialog' height='240px' width='378px' isModal={true} buttons={buttons} header="Shift swap" target="#target" visible={status} open={dialogOpen} close={dialogClose} animationSettings={animationSettings}>
                     <div className='e-shift-swap'>
                         <div>
@@ -1145,15 +1154,6 @@ function App() {
                     </div>
                 </DialogComponent>
             </div>
-            <div>
-                <ToolbarComponent ref={toolbarRef} enableRtl={isRtl} cssClass={`agenda-toolbar ${scheduleObj.currentView !== "Agenda" ? 'e-hidden' : ''}`}>
-                    <ItemsDirective>
-                        <ItemDirective cssClass='tooltip-chips' type="Input" template={getChips} overflow="Show" align="Left" />
-                        <ItemDirective cssClass='tooltip-ddl' type="Input" template={getDdl} overflow="Show" align="Right" />
-                    </ItemsDirective>
-                </ToolbarComponent>
-            </div>
-        </div>
     </div>
     );
 }

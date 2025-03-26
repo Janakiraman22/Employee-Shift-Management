@@ -11,7 +11,7 @@
 
 
 .schedule-control-section .content-wrapper {
-    height: 700px;
+    height: 600px;
     width: 100%;
 }
 
@@ -403,7 +403,7 @@
 .schedule-drag-drop .e-table-wrap:not(.e-agenda-view ) .e-staff {
     display: flex;
     align-items: center; /* Aligns image and info horizontally */
-    margin-bottom: 5px; /* Adds spacing below the staff section */
+    margin-top: 2px; /* Adds spacing below the staff section */
 }
 
 .schedule-drag-drop .e-table-wrap.e-agenda-view {

@@ -58,17 +58,24 @@ const employeeImages = [
     { name: 'Michael', image: michaelImage },
     { name: 'Thomas', image: thomasImage },
     { name: 'Daniel', image: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/robson.png' },
+    { name: 'Mark', image: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/will-smith.png' },
+    { name: 'Brian', image: brianImage },
+    { name: 'Kevin', image: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/alice.png' },
+    { name: 'Salman', image: salamanImage },
 
     { name: 'Emma', image: emmaImage },
     { name: 'Lily', image: lilyImage },
-
     { name: 'Ava', image: avaImage },
     { name: 'Grace', image: graceImage },
+    { name: 'Olivia', image: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/margaret.png' },
+    { name: 'Zoe', image: 'https://ej2.syncfusion.com/react/demos/src/schedule/images/laura.png' },
 
     { name: 'James', image: jamesImage },
     { name: 'Benjamin', image: benjaminImage },
     { name: 'Olivia', image: oliviaImage },
     { name: 'Chloe', image: chloeImage },
+    { name: 'Ricky', image: rickyImage },
+    { name: 'Jake', image: jakeImage },
 ];
 
 
@@ -345,9 +352,11 @@ function App() {
     const getEventElement = (props, element, isOvertime) => {
         let isDefaultEventEle = true;
         let isSwappedEvent = props.Subject.includes('swapped');
+        let isLeaveReplaced = false;
         let employeeName = props.Subject;
         if (props.Subject.includes('covers for')) {
-            employeeName = props.Subject.split('covers for Dr.')[1];
+            isLeaveReplaced = true;
+            employeeName = props.Description;
         }
         if (isSwappedEvent) {
             employeeName = props.Description;
@@ -379,7 +388,7 @@ function App() {
             // Create and append the staff name
             const name = document.createElement('div');
             name.className = 'e-name';
-            name.innerHTML = props.Description.toLowerCase().includes('leave') && !props.Subject.toLowerCase().includes('covers') ? props.Description.split('(')[0].trim() : (isSwappedEvent ? props.Description : props.Subject);
+            name.innerHTML = props.Description.toLowerCase().includes('leave') && !props.Subject.toLowerCase().includes('covers') ? props.Description.split('(')[0].trim() : (isSwappedEvent || isLeaveReplaced ? employeeName : props.Subject);
 
             // Create and append the staff designation
             const designation = document.createElement('div');
@@ -438,20 +447,12 @@ function App() {
             reactContainer.className = "e-icon-element";
             args.element.appendChild(reactContainer);
 
-            
-
-            const beforeRender = (args) => {
-                console.log(tooltipInstance);
-                tooltipInstance.current.offsetX = -20;
-                debugger;
-            }
-
             // Define the icon with tooltip using React
             const LeaveIconWithTooltip = () => {
                 const iconRef = React.useRef(null);
                 let employeeName = args.data.Subject;
                 return (
-                    <TooltipComponent ref={tooltipInstance} beforeRender={beforeRender} content= {`${employeeName} is on leave. To cover this shift, drag a staff member with the same designation from the available list and drop them here.`} position="RightCenter">
+                    <TooltipComponent ref={tooltipInstance} content= {`${employeeName} is on leave. To cover this shift, drag a staff member with the same designation from the available list and drop them here.`} position="RightCenter">
                         <span
                             ref={iconRef}
                             className="e-leave e-icons"
@@ -470,14 +471,35 @@ function App() {
             if (args.element.classList.contains('event-leave')) {
                 args.element.classList.remove('event-leave');
             }
+            // let employees = args.data.Subject.split(' covers for ');
 
-            const leaveElement = args.element.querySelector('.e-leave');
-            if (leaveElement) {
-                // Add classes to the element
-                leaveElement.classList.add('e-replaced', 'sf-icon-user-replace');
-                // Remove the 'e-leave' class
-                leaveElement.classList.remove('e-leave');
+            // let replaceEmployeeName = employees[0];
+            // let shiftEmployeeName = employees[1];
+
+            let reactContainer = args.element.querySelector('.e-icon-element');
+
+            if (!reactContainer) {
+                reactContainer = document.createElement('span');
+                reactContainer.className = "e-icon-element";
+                args.element.appendChild(reactContainer);
             }
+
+            const LeaveReplacedIconWithTooltip = () => {
+                const iconRef = React.useRef(null);
+                return (
+                    <TooltipComponent ref={tooltipInstance} content= 'Leave covered by replacement' position="RightCenter">
+                        <span
+                            ref={iconRef}
+                            className="e-icons e-replaced sf-icon-user-replace"
+                            style={{ 
+                                cursor: 'pointer'
+                             }}
+                        ></span>
+                    </TooltipComponent>
+                );
+            };
+            // Render Tooltip + Icon inside Scheduler event
+            ReactDOM.createRoot(reactContainer).render(<LeaveReplacedIconWithTooltip />);
         }
         if (args.data.Description.toLowerCase().includes('swap-request') && !args.data.Subject.toLowerCase().includes('swapped') && scheduleObj.current.currentView !== 'Agenda') {
             args.element.classList.add('event-swap');
@@ -573,6 +595,8 @@ function App() {
             }
 
             allData = allData.filter((item) => item.Id !== parseInt(draggedItemId, 10));
+
+            event.data.Description = event.data.Subject.split(' covers for')[0];
             isTreeItemDropped = false;
         }
     };
@@ -717,8 +741,9 @@ function App() {
                     const designation = designationsData.filter((item) => item.id === parseInt(eventDetails.DesignationId, 10))[0].name;
                     if (role === filteredData[0].role && designation === filteredData[0].Description) {
                         // let resourceDetails = scheduleObj.current.getResourcesByIndex(eventDetails.EmployeeId);
-                        eventDetails.Subject = 'Dr.' + filteredData[0].Name + ' covers for Dr.' + eventDetails.Subject;
+                        eventDetails.Subject = filteredData[0].Name + ' covers for ' + eventDetails.Subject;
                         eventDetails.Designation = filteredData[0].Description;
+
 
                         isTreeItemDropped = true;
 

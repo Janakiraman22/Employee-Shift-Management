@@ -261,12 +261,13 @@ function App() {
                     return false;
                 });
 
-                reqEvent[0].Description = accEvent[0].Subject;
-                reqEvent[0].Subject = 'Shift swapped between ' + reqShift.name + ' and ' + selectedEmployee.name;
+
+                reqEvent[0].Description = selectedEmployee.name;
+                reqEvent[0].Subject = reqShift.name + ' swapped the shift with ' + selectedEmployee.name + '’s shift scheduled from ' + (intl.formatDate(accEvent[0].StartTime, { skeleton: 'MMMd' }) + ', ' + getTimeString(accEvent[0].StartTime) + ' to ' + intl.formatDate(accEvent[0].EndTime, { skeleton: 'MMMd' }) + ', ' + getTimeString(accEvent[0].EndTime));
                 dataSource[reqEventIndex] = reqEvent[0];
 
-                accEvent[0].Description = accEvent[0].Subject;
-                accEvent[0].Subject = 'Shift swapped between ' + selectedEmployee.name + ' and ' + reqShift.name;
+                accEvent[0].Description = reqShift.name ;
+                accEvent[0].Subject = selectedEmployee.name + ' swapped the shift with ' + reqShift.name + '’s shift scheduled from ' + (intl.formatDate(reqEvent[0].StartTime, { skeleton: 'MMMd' }) + ', ' + getTimeString(reqEvent[0].StartTime) + ' to ' + intl.formatDate(reqEvent[0].EndTime, { skeleton: 'MMMd' }) + ', ' + getTimeString(reqEvent[0].EndTime));
                 dataSource[accEventIndex] = accEvent[0];
 
                 scheduleObj.current.eventSettings.dataSource = dataSource;
@@ -294,6 +295,10 @@ function App() {
     const getTimeString = (value) => {
         return intl.formatDate(value, { skeleton: 'h' });
     }
+
+    // const getTimeString = (value) => {
+    //     return intl.formatDate(value, { skeleton: 'h' });
+    // }
 
     const [shiftsData, setShiftsData] = useState([]);
 
@@ -1049,7 +1054,7 @@ function App() {
                     selectedDate={selectedDate}
                     cssClass='schedule-drag-drop'
                     width='100%'
-                    height='80%'
+                    height='100%'
                     // startHour="07:00"
                     // endHour='30:59'
                     group={group}

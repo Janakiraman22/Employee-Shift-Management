@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useRef, useState } from 'react';
-import { ScheduleComponent, TimelineViews, Inject, TimelineMonth, ResourceDirective, ResourcesDirective, ViewsDirective, ViewDirective, Resize, DragAndDrop, Agenda } from '@syncfusion/ej2-react-schedule';
+import { ScheduleComponent, TimelineViews, Inject, TimelineMonth, ResourceDirective, ResourcesDirective, ViewsDirective, ViewDirective, Resize, DragAndDrop, Agenda, ToolbarItemsDirective, ToolbarItemDirective } from '@syncfusion/ej2-react-schedule';
 import { closest, remove, addClass, Internationalization } from '@syncfusion/ej2-base';
 import { TreeViewComponent } from '@syncfusion/ej2-react-navigations';
 import { DialogComponent } from '@syncfusion/ej2-react-popups';
@@ -31,6 +31,8 @@ import { ToolbarComponent, ItemsDirective, ItemDirective } from '@syncfusion/ej2
 import { L10n, setCurrencyCode } from '@syncfusion/ej2-base';
 import { Locale } from './common/locale.ts';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+
+const intl = new Internationalization();
 
 const employeeRole = [
     { role: 'Doctors', id: 1 },
@@ -77,10 +79,6 @@ const employeeImages = [
     { name: 'Ricky', image: rickyImage },
     { name: 'Jake', image: jakeImage },
 ];
-
-
-const selectedDate = new Date(2025, 2, 5);
-const intl = new Internationalization();
 
 let eventData = [
     { Id: 1, RoleId: 1, DesignationId: 1, EmployeeId: 1, Subject: "John", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
@@ -139,8 +137,6 @@ let eventData = [
     { Id: 54, RoleId: 1, DesignationId: 4, EmployeeId: 8, Subject: "Daniel", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 55, RoleId: 1, DesignationId: 4, EmployeeId: 7, Subject: "Thomas", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
 
-
-
     { Id: 57, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 58, RoleId: 2, DesignationId: 5, EmployeeId: 10, Subject: "Lily", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
     { Id: 59, RoleId: 2, DesignationId: 5, EmployeeId: 9, Subject: "Emma", StartTime: new Date("2025-03-03T01:30:00.000Z"), EndTime: new Date("2025-03-03T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
@@ -168,7 +164,6 @@ let eventData = [
     { Id: 81, RoleId: 2, DesignationId: 6, EmployeeId: 11, Subject: "Ava", StartTime: new Date("2025-03-07T01:30:00.000Z"), EndTime: new Date("2025-03-07T13:30:00.000Z"), Description: "Available (Day Shift)" },
     { Id: 82, RoleId: 2, DesignationId: 6, EmployeeId: 12, Subject: "Grace", StartTime: new Date("2025-03-07T13:30:00.000Z"), EndTime: new Date("2025-03-08T01:30:00.000Z"), Description: "Available (Night Shift)" },
     { Id: 83, RoleId: 2, DesignationId: 6, EmployeeId: 11, Subject: "Ava", StartTime: new Date("2025-03-08T01:30:00.000Z"), EndTime: new Date("2025-03-08T13:30:00.000Z"), Description: "Available (Day Shift)" },
-
 
     { Id: 85, RoleId: 3, DesignationId: 7, EmployeeId: 13, Subject: "James", StartTime: new Date("2025-03-02T01:30:00.000Z"), EndTime: new Date("2025-03-02T13:30:00.000Z"), Description: "Available (Day Shift)", IsReadonly: true },
     { Id: 86, RoleId: 3, DesignationId: 7, EmployeeId: 14, Subject: "Benjamin", StartTime: new Date("2025-03-02T13:30:00.000Z"), EndTime: new Date("2025-03-03T01:30:00.000Z"), Description: "Available (Night Shift)", IsReadonly: true },
@@ -219,6 +214,9 @@ const workHours = { start: '00:00', end: '23:59' };
 function App() {
     const scheduleObj = useRef(null);
     const dialogInstance = useRef(null);
+
+    const selectedDate = new Date(2025, 2, 5);
+    
 
     const [isRtl, setRtl] = useState(false);
 
@@ -416,9 +414,9 @@ function App() {
     const onEventRendered = (args) => {
         let startTime = getTimeString(args.data.StartTime);
         if (startTime === '7 AM' || startTime === '1 PM') {
-            args.element.classList.add(args.data.Description.includes('On-Call Duty') ? 'on-call-shift' : 'day-shift');
+            args.element.classList.add('day-shift');
         } else {
-            args.element.classList.add(args.data.Description.includes('On-Call Duty') ? 'on-call-shift' : 'night-shift');
+            args.element.classList.add('night-shift');
         }
         const innerWrap = args.element.querySelector('.e-inner-wrap');
         if (innerWrap) {
@@ -949,6 +947,7 @@ function App() {
                             <span className='staff-name'>{props.Subject} </span>
                             <span className='staff-role'>{role} </span>
                             <span className='staff-designation'>({designation})</span>
+                            <span className='staff-availability'>{props.Description.toLowerCase().includes('leave') ? ' - On Leave' : ''}</span>
                         </div>
                         <div className="event-time">
                             <label>Shift Time</label>: {getTimeString(props.StartTime) + ' - ' + getTimeString(props.EndTime)}
@@ -1010,8 +1009,8 @@ function App() {
 
     loadLocalization();
 
-    const onEventClick = (args) => {
-        if (args.originalEvent.target.classList.contains('sf-icon-replace-request')) {
+    const onPopupOpen =(args) => {
+        if (args.type === 'QuickInfo' && args.data.IsReadonly) {
             args.cancel = true;
         }
     }
@@ -1079,7 +1078,7 @@ function App() {
                     selectedDate={selectedDate}
                     cssClass='schedule-drag-drop'
                     width='100%'
-                    height='100%'
+                    height='80%'
                     // startHour="07:00"
                     // endHour='30:59'
                     group={group}
@@ -1088,7 +1087,6 @@ function App() {
                     workHours={workHours}
                     showTimeIndicator={true}
                     // showQuickInfo={false}
-                    eventClick={onEventClick}
                     eventRendered={onEventRendered}
                     //    resourceHeaderTemplate={resourceHeaderTemplate}
                     resizeStart={resizeStart}
@@ -1098,6 +1096,7 @@ function App() {
                     navigating={onNavigating}
                     dataBound={onDataBound}
                     editorHeaderTemplate={editorHeaderTemplate}
+                    popupOpen={onPopupOpen}
                 >
 
                     <ViewsDirective>
@@ -1125,7 +1124,13 @@ function App() {
                             groupIDField="groupId"
                         />
                     </ResourcesDirective>
-                    <Inject services={[TimelineViews, TimelineMonth, Agenda, Resize, DragAndDrop]} />
+                    <Inject services={[TimelineViews, Agenda]} />
+                    <ToolbarItemsDirective>
+                        <ToolbarItemDirective name='Previous' align='Left'></ToolbarItemDirective>
+                        <ToolbarItemDirective name='Next' align='Left'></ToolbarItemDirective>
+                        <ToolbarItemDirective name='DateRangeText' align='Left'></ToolbarItemDirective>
+                        <ToolbarItemDirective name='Views' align='Right'></ToolbarItemDirective>
+                    </ToolbarItemsDirective>
                 </ScheduleComponent>
                 <div className={`treeview-container ${isRtl ? 'e-rtl' : ''}`}>
                     <div className="title-text"><span>Available List</span></div>

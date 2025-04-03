@@ -362,7 +362,7 @@
 
 }
 
-.template-wrap:not(.overtime) {
+.template-wrap {
     padding: 4px;
         display: flex;
         flex-direction: column; /* Stack the image/info and shift time vertically */
@@ -425,13 +425,18 @@
                 }
             
                 .staff-role,
-                .staff-designation {
+                .staff-designation,
+                .staff-availability {
                     color: #1C1B1F;
                     font-family: 'Roboto';
                     font-weight: 400;
                     font-size: 14px;
                     line-height: 20px;
                     letter-spacing: 0.24px;
+                }
+
+                .staff-availability {
+                    color: #C70404;
                 }
             
                 .event-time {
@@ -806,6 +811,13 @@
 
     .e-subject-container {
         width: 100%;
+    }
+
+    .e-start-end-row,
+    .e-resources-row {
+        pointer-events: none;  /* Prevents clicks */
+        opacity: 0.5;  /* Makes it look disabled */
+        cursor: not-allowed; 
     }
 
     .e-location-container,

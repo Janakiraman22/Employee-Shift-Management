@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useRef, useState } from 'react';
-import { ScheduleComponent, TimelineViews, Inject, TimelineMonth, ResourceDirective, ResourcesDirective, ViewsDirective, ViewDirective, Resize, DragAndDrop, Agenda, ToolbarItemsDirective, ToolbarItemDirective } from '@syncfusion/ej2-react-schedule';
+import { ScheduleComponent, TimelineViews, Inject, ResourceDirective, ResourcesDirective, ViewsDirective, ViewDirective, Agenda, ToolbarItemsDirective, ToolbarItemDirective } from '@syncfusion/ej2-react-schedule';
 import { closest, remove, addClass, Internationalization } from '@syncfusion/ej2-base';
 import { TreeViewComponent } from '@syncfusion/ej2-react-navigations';
 import { DialogComponent } from '@syncfusion/ej2-react-popups';

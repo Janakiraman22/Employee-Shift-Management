@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { registerLicense } from '@syncfusion/ej2-base';
 
 // Registering Syncfusion license key
-registerLicense('ORg4AjUWIQA/Gnt2XVhhQlJHfVtdVHxLflFzVWVTe1x6cVBWESFaRnZdR11gSH5TcEFnWXlXc3NQ');
+registerLicense('ORg4AjUWIQA/Gnt2XVhhQlJHfVtdVHxLflFzVWVTe1x6cVBWESFaRnZdR11gS3lTf0dnXHxceHJRTWJU');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -599,12 +599,15 @@
     height: 60px;
 
     .e-btn {
-        color: #6750A4;
         font-family: 'Roboto';
         font-size: 12px;
         font-weight: 500;
         letter-spacing: 0.5px;
         line-height: 16px;
+    }
+
+    .e-btn:not(:disabled) {
+        color: #6750A4;
     }
 }
 }
@@ -663,13 +666,9 @@
     margin-bottom: 3px; */
 }
 
-.e-appointment {
+.e-schedule-table .e-appointment {
     height: 45px !important;
-    /* clip-path: inset(0 6px 0 0); */
-
 }
-
-
 
 .e-appointment.day-shift {
     background-color: #0875B8;
@@ -809,7 +808,7 @@
 .e-schedule-table .e-appointment.event-swapped .e-swapped.e-icons, 
 .e-schedule-table .e-appointment.e-covers .e-replaced.e-icons,
 .e-schedule-table .e-appointment .e-leave.e-icons {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .e-quick-popup-wrapper .e-delete.e-icon-btn,
@@ -828,7 +827,7 @@
     .e-schedule-table .e-appointment.event-swapped .e-swapped.e-icons,
     .e-schedule-table .e-appointment.e-covers .e-replaced.e-icons,
     .e-schedule-table .e-appointment .e-leave.e-icons {
-        margin-right: 10px;
+        margin-right: 8px;
     }
 }
 
@@ -907,7 +906,7 @@
 
     .e-resource-cells.e-child-node,
     .e-work-cells:not(.e-resource-group-cells){
-        height: 70px;
+        height: 60px;
     }
 }
 

@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useRef, useState } from 'react';
 import { ScheduleComponent, TimelineViews, Inject, ResourceDirective, ResourcesDirective, ViewsDirective, ViewDirective, Agenda, ToolbarItemsDirective, ToolbarItemDirective } from '@syncfusion/ej2-react-schedule';
-import { closest, remove, addClass, Internationalization } from '@syncfusion/ej2-base';
+import { closest, remove, addClass, Internationalization, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { TreeViewComponent } from '@syncfusion/ej2-react-navigations';
 import { DialogComponent } from '@syncfusion/ej2-react-popups';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
@@ -216,9 +216,16 @@ const timeScale = {
 
 const workHours = { start: '00:00', end: '23:59' };
 
+let isPreventQuickInfo = false;
+
+
+
 function App() {
     const scheduleObj = useRef(null);
     const dialogInstance = useRef(null);
+
+    const nameDropdownListRef = useRef(null);
+    const shiftDropdownListRef = useRef(null);
 
     const selectedDate = new Date(2025, 2, 5);
     
@@ -290,6 +297,7 @@ function App() {
             // Accessing button component properties by buttonModel property
             buttonModel: {
                 content: 'Swap Shift',
+                disabled: isNullOrUndefined(shiftDropdownListRef?.current?.value) ? true: false
             },
         },
     ];
@@ -428,7 +436,7 @@ function App() {
             innerWrap.innerHTML = '';
             const elementToAppend = getEventElement(args.data, args.element);
 
-            let appointmentWidth = parseInt(args.element.style.width.split('px')[0],10) - 6;
+            let appointmentWidth = parseInt(args.element.style.width.split('px')[0],10) - 5;
             args.element.style.width = appointmentWidth + 'px';
             innerWrap.appendChild(elementToAppend);
 
@@ -516,6 +524,7 @@ function App() {
                     if (el) {
                         el.addEventListener('click', (event) => {
                             if (event.target.classList.contains('sf-icon-replace-request')) {
+                                isPreventQuickInfo = true;
                                 requestShiftSwap(args);
                             }
                         });
@@ -535,7 +544,7 @@ function App() {
                             ref={iconRef}
                             className="e-swap e-icons sf-icon-replace-request"
                             style={{ 
-                                cursor: 'pointer', marginLeft: '5px'
+                                cursor: 'pointer'
                              }}
                         ></span>
                     </TooltipComponent>
@@ -1011,8 +1020,9 @@ function App() {
     loadLocalization();
 
     const onPopupOpen =(args) => {
-        if ((args.type === 'QuickInfo' && args.data.IsReadonly) || (args.type === 'Editor' && !isTreeItemDropped)) {
+        if ((args.type === 'QuickInfo' && (args.data.IsReadonly || args.target?.classList.contains('e-work-cells') || isPreventQuickInfo)) || (args.type === 'Editor' && !isTreeItemDropped)) {
             args.cancel = true;
+            isPreventQuickInfo = false;
         }
     }
 
@@ -1166,6 +1176,7 @@ function App() {
                         <div>
                             <label>Select an employee(Available for swapping)</label>
                             <DropDownListComponent
+                                ref={nameDropdownListRef}
                                 dataSource={employeeList}
                                 fields={{ text: 'name', value: 'id' }}
                                 change={dropDownListChange1}
@@ -1176,6 +1187,7 @@ function App() {
                         <div style={{ marginTop: '10px' }}>
                             <label>Select shift</label>
                             <DropDownListComponent
+                               ref={shiftDropdownListRef}
                                 dataSource={shiftList}
                                 fields={{ text: 'name', value: 'id' }}
                                 placeholder="Select shift"

@@ -1079,7 +1079,7 @@ function App() {
                     selectedDate={selectedDate}
                     cssClass='schedule-drag-drop'
                     width='100%'
-                    height='80%'
+                    height='100%'
                     startHour="07:00"
                     endHour='23:00'
                     group={group}

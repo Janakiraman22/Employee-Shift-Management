@@ -230,7 +230,7 @@ function App() {
     const selectedDate = new Date(2025, 2, 5);
 
 
-    const isRtl =false;
+    const isRtl = false;
 
     const [employeeList, assignEmp] = useState([]);
     const [shiftList, assignShift] = useState([]);
@@ -765,7 +765,7 @@ function App() {
         document.body.classList.add('e-disble-not-allowed');
     };
 
-    let listObjects = [];
+    let treeRefs = [];
     let activeTab = 0;
     let type = ['', 'Doctors', 'Nurses', 'Support Staffs'];
 
@@ -777,23 +777,32 @@ function App() {
     let PrevSelectedItem = 0;
 
     const onBeforeClick = (args) => {
-        PrevSelectedItem = chipsInstance.current.selectedChips;
+        activeTab = args.index;
+        PrevSelectedItem = chipsInstance.current?.selectedChips;
+        if (activeTab === PrevSelectedItem) {
+            args.cancel = true;
+        }
     }
 
     const chipClick = (args) => {
         if (treeObj1 !== undefined) {
-            activeTab = chipsInstance.current.selectedChips;
-            listObjects = [treeObj1, treeObj2, treeObj3, treeObj4];
-            listObjects[PrevSelectedItem].current.element.style.display = 'none';
-            listObjects[activeTab].current.element.style = {};
+            
+            treeRefs = [treeObj1, treeObj2, treeObj3, treeObj4];
 
-            let newData;
-            if (activeTab === 0) {
-                listObjects[activeTab].current.fields.dataSource = allData;
-            } else {
-                newData = filterData(allData, type[activeTab]); // Filter the data while selecting tab
-                listObjects[activeTab].current.fields.dataSource = newData;
+
+           
+            const previousTree = treeRefs[PrevSelectedItem].current;
+            const activeTree = treeRefs[activeTab].current;
+            if (previousTree?.element) {
+                previousTree.element.style.display = 'none';
             }
+            if (activeTree?.element) {
+                activeTree.element.style.display = '';
+                activeTree.fields.dataSource = activeTab === 0
+                    ? allData
+                    : filterData(allData, type[activeTab]);
+            }
+
         }
     }
 
@@ -1004,121 +1013,121 @@ function App() {
 
 
     return (<div className='schedule-control-section'>
-            <div className='content-wrapper shift-management-sample-wrapper'>
-                <ScheduleComponent
-                    ref={scheduleObj}
-                    locale='en-US'
-                    enableRtl={isRtl}
-                    currentView="TimelineWeek"
-                    selectedDate={selectedDate}
-                    cssClass='schedule-shift-management'
-                    width='100%'
-                    height='100%'
-                    startHour="07:00"
-                    endHour='23:00'
-                    group={group}
-                    eventSettings={{ dataSource: eventData, query: filteredQuery }}
-                    timeScale={timeScale}
-                    workHours={workHours}
-                    showTimeIndicator={true}
-                    // showQuickInfo={false}
-                    eventRendered={onEventRendered}
-                    //    resourceHeaderTemplate={resourceHeaderTemplate}
-                    resizeStart={resizeStart}
-                    resizing={resizing}
-                    resizeStop={resizeStop}
-                    actionBegin={onActionBegin}
-                    navigating={onNavigating}
-                    dataBound={onDataBound}
-                    editorHeaderTemplate={editorHeaderTemplate}
-                    popupOpen={onPopupOpen}
-                >
-                    <ViewsDirective>
-                        <ViewDirective option="TimelineWeek" />
-                        <ViewDirective option='Agenda' eventTemplate={agendaTemplate} />
-                    </ViewsDirective>
-                    <ResourcesDirective>
-                        <ResourceDirective
-                            field="RoleId"
-                            title="Roles"
-                            name="Roles"
-                            dataSource={employeeRole}
-                            textField="role"
-                            idField="id"
-                        />
-                        <ResourceDirective
-                            field="DesignationId"
-                            title="Designations"
-                            name="Designations"
-                            allowMultiple={true}
-                            dataSource={designationsData}
-                            textField="name"
-                            idField="id"
-                            groupIDField="groupId"
-                        />
-                    </ResourcesDirective>
-                    <Inject services={[TimelineViews, Agenda]} />
-                    <ToolbarItemsDirective>
-                        <ToolbarItemDirective name='Previous' align='Left'></ToolbarItemDirective>
-                        <ToolbarItemDirective name='Next' align='Left'></ToolbarItemDirective>
-                        <ToolbarItemDirective name='DateRangeText' align='Left'></ToolbarItemDirective>
-                        <ToolbarItemDirective name='Views' align='Right'></ToolbarItemDirective>
-                    </ToolbarItemsDirective>
-                </ScheduleComponent>
-                <div className={`treeview-container ${isRtl ? 'e-rtl' : ''}`}>
-                    <div className="title-text"><span>Available List</span></div>
-                    <div className="role-tabs">
-                        <ChipListComponent ref={chipsInstance} enableRtl={isRtl} id="chip-avatar" selection="Single" cssClass="e-outline" selectedChips={[0]} aria-labelledby="choiceChips" beforeClick={onBeforeClick} click={chipClick.bind(this)}>
-                            <ChipsDirective>
-                                <ChipDirective text="All" />
-                                <ChipDirective text="Doctors" />
-                                <ChipDirective text="Nurses" />
-                                <ChipDirective text="Staffs" />
-                            </ChipsDirective>
-                        </ChipListComponent>
-                    </div>
-                    <TreeViewComponent ref={treeObj1} enableRtl={isRtl} id="treeview1" cssClass='treeview-external-drag' style={{ display: 'block' }} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields1} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
-                    <TreeViewComponent ref={treeObj2} enableRtl={isRtl} id="treeview2" cssClass='treeview-external-drag' style={styleNone} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields2} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
-                    <TreeViewComponent ref={treeObj3} enableRtl={isRtl} id="treeview3" cssClass='treeview-external-drag' style={styleNone} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields3} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
-                    <TreeViewComponent ref={treeObj4} enableRtl={isRtl} id="treeview4" cssClass='treeview-external-drag' style={styleNone} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields4} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
+        <div className='content-wrapper shift-management-sample-wrapper'>
+            <ScheduleComponent
+                ref={scheduleObj}
+                locale='en-US'
+                enableRtl={isRtl}
+                currentView="TimelineWeek"
+                selectedDate={selectedDate}
+                cssClass='schedule-shift-management'
+                width='100%'
+                height='100%'
+                startHour="07:00"
+                endHour='23:00'
+                group={group}
+                eventSettings={{ dataSource: eventData, query: filteredQuery }}
+                timeScale={timeScale}
+                workHours={workHours}
+                showTimeIndicator={true}
+                // showQuickInfo={false}
+                eventRendered={onEventRendered}
+                //    resourceHeaderTemplate={resourceHeaderTemplate}
+                resizeStart={resizeStart}
+                resizing={resizing}
+                resizeStop={resizeStop}
+                actionBegin={onActionBegin}
+                navigating={onNavigating}
+                dataBound={onDataBound}
+                editorHeaderTemplate={editorHeaderTemplate}
+                popupOpen={onPopupOpen}
+            >
+                <ViewsDirective>
+                    <ViewDirective option="TimelineWeek" />
+                    <ViewDirective option='Agenda' eventTemplate={agendaTemplate} />
+                </ViewsDirective>
+                <ResourcesDirective>
+                    <ResourceDirective
+                        field="RoleId"
+                        title="Roles"
+                        name="Roles"
+                        dataSource={employeeRole}
+                        textField="role"
+                        idField="id"
+                    />
+                    <ResourceDirective
+                        field="DesignationId"
+                        title="Designations"
+                        name="Designations"
+                        allowMultiple={true}
+                        dataSource={designationsData}
+                        textField="name"
+                        idField="id"
+                        groupIDField="groupId"
+                    />
+                </ResourcesDirective>
+                <Inject services={[TimelineViews, Agenda]} />
+                <ToolbarItemsDirective>
+                    <ToolbarItemDirective name='Previous' align='Left'></ToolbarItemDirective>
+                    <ToolbarItemDirective name='Next' align='Left'></ToolbarItemDirective>
+                    <ToolbarItemDirective name='DateRangeText' align='Left'></ToolbarItemDirective>
+                    <ToolbarItemDirective name='Views' align='Right'></ToolbarItemDirective>
+                </ToolbarItemsDirective>
+            </ScheduleComponent>
+            <div className={`treeview-container ${isRtl ? 'e-rtl' : ''}`}>
+                <div className="title-text"><span>Available List</span></div>
+                <div className="role-tabs">
+                    <ChipListComponent ref={chipsInstance} enableRtl={isRtl} id="chip-avatar" selection="Single" cssClass="e-outline" selectedChips={[0]} aria-labelledby="choiceChips" beforeClick={onBeforeClick} click={chipClick.bind(this)}>
+                        <ChipsDirective>
+                            <ChipDirective text="All" />
+                            <ChipDirective text="Doctors" />
+                            <ChipDirective text="Nurses" />
+                            <ChipDirective text="Staffs" />
+                        </ChipsDirective>
+                    </ChipListComponent>
                 </div>
-                <div>
-                    <ToolbarComponent ref={toolbarRef} enableRtl={isRtl} cssClass={`agenda-toolbar ${scheduleObj.currentView !== "Agenda" ? 'e-hidden' : ''}`}>
-                        <ItemsDirective>
-                            <ItemDirective cssClass='tooltip-chips' type="Input" template={getChips} overflow="Show" align="Left" />
-                            <ItemDirective cssClass='tooltip-ddl' type="Input" template={getDdl} overflow="Show" align="Right" />
-                        </ItemsDirective>
-                    </ToolbarComponent>
-                </div>
-                <div id="target" className="col-lg-8">
-                    <DialogComponent ref={dialogInstance} enableRtl={isRtl} id="modalDialog" cssClass='swap-dialog' height='240px' width='378px' isModal={true} buttons={buttons} header="Shift swap" target="#target" visible={status} open={dialogOpen} close={dialogClose} animationSettings={animationSettings}>
-                        <div className='e-shift-swap'>
-                            <div>
-                                <label>Select an employee(Available for swapping)</label>
-                                <DropDownListComponent
-                                    ref={nameDropdownListRef}
-                                    dataSource={employeeList}
-                                    fields={{ text: 'name', value: 'id' }}
-                                    change={dropDownListChange1}
-                                    placeholder="Select an employee"
-                                />
-                            </div>
-
-                            <div style={{ marginTop: '10px' }}>
-                                <label>Select shift</label>
-                                <DropDownListComponent
-                                    ref={shiftDropdownListRef}
-                                    dataSource={shiftList}
-                                    fields={{ text: 'name', value: 'id' }}
-                                    placeholder="Select shift"
-                                    change={dropDownListChange2}
-                                />
-                            </div>
+                <TreeViewComponent ref={treeObj1} enableRtl={isRtl} id="treeview1" cssClass='treeview-external-drag' style={{ display: 'block' }} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields1} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
+                <TreeViewComponent ref={treeObj2} enableRtl={isRtl} id="treeview2" cssClass='treeview-external-drag' style={styleNone} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields2} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
+                <TreeViewComponent ref={treeObj3} enableRtl={isRtl} id="treeview3" cssClass='treeview-external-drag' style={styleNone} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields3} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
+                <TreeViewComponent ref={treeObj4} enableRtl={isRtl} id="treeview4" cssClass='treeview-external-drag' style={styleNone} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields4} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
+            </div>
+            <div>
+                <ToolbarComponent ref={toolbarRef} enableRtl={isRtl} cssClass={`agenda-toolbar ${scheduleObj.currentView !== "Agenda" ? 'e-hidden' : ''}`}>
+                    <ItemsDirective>
+                        <ItemDirective cssClass='tooltip-chips' type="Input" template={getChips} overflow="Show" align="Left" />
+                        <ItemDirective cssClass='tooltip-ddl' type="Input" template={getDdl} overflow="Show" align="Right" />
+                    </ItemsDirective>
+                </ToolbarComponent>
+            </div>
+            <div id="target" className="col-lg-8">
+                <DialogComponent ref={dialogInstance} enableRtl={isRtl} id="modalDialog" cssClass='swap-dialog' height='240px' width='378px' isModal={true} buttons={buttons} header="Shift swap" target="#target" visible={status} open={dialogOpen} close={dialogClose} animationSettings={animationSettings}>
+                    <div className='e-shift-swap'>
+                        <div>
+                            <label>Select an employee(Available for swapping)</label>
+                            <DropDownListComponent
+                                ref={nameDropdownListRef}
+                                dataSource={employeeList}
+                                fields={{ text: 'name', value: 'id' }}
+                                change={dropDownListChange1}
+                                placeholder="Select an employee"
+                            />
                         </div>
-                    </DialogComponent>
-                </div>
+
+                        <div style={{ marginTop: '10px' }}>
+                            <label>Select shift</label>
+                            <DropDownListComponent
+                                ref={shiftDropdownListRef}
+                                dataSource={shiftList}
+                                fields={{ text: 'name', value: 'id' }}
+                                placeholder="Select shift"
+                                change={dropDownListChange2}
+                            />
+                        </div>
+                    </div>
+                </DialogComponent>
             </div>
         </div>
+    </div>
     );
 }
 

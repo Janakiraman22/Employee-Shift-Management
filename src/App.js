@@ -28,7 +28,7 @@ import oliviaImage from './Avatar/Olivia.png';
 import chloeImage from './Avatar/Chloe.png';
 import { Query } from '@syncfusion/ej2-data';
 import { ToolbarComponent, ItemsDirective, ItemDirective } from '@syncfusion/ej2-react-navigations';
-import { L10n, setCurrencyCode } from '@syncfusion/ej2-base';
+import { L10n } from '@syncfusion/ej2-base';
 import { Locale } from './common/locale.ts';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
@@ -228,9 +228,9 @@ function App() {
     const shiftDropdownListRef = useRef(null);
 
     const selectedDate = new Date(2025, 2, 5);
-    
 
-    const [isRtl, setRtl] = useState(false);
+
+    const isRtl =false;
 
     const [employeeList, assignEmp] = useState([]);
     const [shiftList, assignShift] = useState([]);
@@ -267,7 +267,7 @@ function App() {
                     }
                     return false;
                 });
-                
+
                 let accEventIndex;
                 let accShiftIds = selectedShift.eventId;
                 let accEvent = dataSource.filter((item, index) => {
@@ -283,7 +283,7 @@ function App() {
                 reqEvent[0].Subject = reqShift.name + ' swapped the shift with ' + selectedEmployee.name + '’s shift scheduled from ' + (intl.formatDate(accEvent[0].StartTime, { skeleton: 'MMMd' }) + ', ' + getTimeString(accEvent[0].StartTime) + ' to ' + intl.formatDate(accEvent[0].EndTime, { skeleton: 'MMMd' }) + ', ' + getTimeString(accEvent[0].EndTime));
                 dataSource[reqEventIndex] = reqEvent[0];
 
-                accEvent[0].Description = reqShift.name ;
+                accEvent[0].Description = reqShift.name;
                 accEvent[0].Subject = selectedEmployee.name + ' swapped the shift with ' + reqShift.name + '’s shift scheduled from ' + (intl.formatDate(reqEvent[0].StartTime, { skeleton: 'MMMd' }) + ', ' + getTimeString(reqEvent[0].StartTime) + ' to ' + intl.formatDate(reqEvent[0].EndTime, { skeleton: 'MMMd' }) + ', ' + getTimeString(reqEvent[0].EndTime));
                 dataSource[accEventIndex] = accEvent[0];
 
@@ -297,7 +297,7 @@ function App() {
             // Accessing button component properties by buttonModel property
             buttonModel: {
                 content: 'Swap Shift',
-                disabled: isNullOrUndefined(shiftDropdownListRef?.current?.value) ? true: false
+                disabled: isNullOrUndefined(shiftDropdownListRef?.current?.value) ? true : false
             },
         },
     ];
@@ -436,7 +436,7 @@ function App() {
             innerWrap.innerHTML = '';
             const elementToAppend = getEventElement(args.data, args.element);
 
-            let appointmentWidth = parseInt(args.element.style.width.split('px')[0],10) - 5;
+            let appointmentWidth = parseInt(args.element.style.width.split('px')[0], 10) - 5;
             args.element.style.width = appointmentWidth + 'px';
             innerWrap.appendChild(elementToAppend);
 
@@ -459,13 +459,13 @@ function App() {
                 const iconRef = React.useRef(null);
                 let employeeName = args.data.Subject;
                 return (
-                    <TooltipComponent ref={tooltipInstance} content= {`${employeeName} is on leave. To cover this shift, drag a staff member with the same designation from the available list and drop them here.`} position="RightCenter">
+                    <TooltipComponent ref={tooltipInstance} cssClass='shift-management-tooltip' content={`${employeeName} is on leave. To cover this shift, drag a staff member with the same designation from the available list and drop them here.`} position="RightCenter">
                         <span
                             ref={iconRef}
                             className="e-leave e-icons"
-                            style={{ 
+                            style={{
                                 cursor: 'pointer'
-                             }}
+                            }}
                         ></span>
                     </TooltipComponent>
                 );
@@ -478,10 +478,6 @@ function App() {
             if (args.element.classList.contains('event-leave')) {
                 args.element.classList.remove('event-leave');
             }
-            // let employees = args.data.Subject.split(' covers for ');
-
-            // let replaceEmployeeName = employees[0];
-            // let shiftEmployeeName = employees[1];
 
             let reactContainer = args.element.querySelector('.e-icon-element');
 
@@ -494,13 +490,13 @@ function App() {
             const LeaveReplacedIconWithTooltip = () => {
                 const iconRef = React.useRef(null);
                 return (
-                    <TooltipComponent ref={tooltipInstance} content= 'Leave covered by replacement' position="RightCenter">
+                    <TooltipComponent ref={tooltipInstance} cssClass='shift-management-tooltip' content='Leave covered by replacement' position="RightCenter">
                         <span
                             ref={iconRef}
                             className="e-icons e-replaced sf-icon-user-replace"
-                            style={{ 
+                            style={{
                                 cursor: 'pointer'
-                             }}
+                            }}
                         ></span>
                     </TooltipComponent>
                 );
@@ -539,13 +535,13 @@ function App() {
                 }, []);
 
                 return (
-                    <TooltipComponent content="Click here to swap shift" position="RightCenter">
+                    <TooltipComponent ref={tooltipInstance} cssClass='shift-management-tooltip' content="Click here to swap shift" position="RightCenter">
                         <span
                             ref={iconRef}
                             className="e-swap e-icons sf-icon-replace-request"
-                            style={{ 
+                            style={{
                                 cursor: 'pointer'
-                             }}
+                            }}
                         ></span>
                     </TooltipComponent>
                 );
@@ -568,13 +564,13 @@ function App() {
             const ShiftSwappedIconWithTooltip = () => {
                 const iconRef = React.useRef(null);
                 return (
-                    <TooltipComponent content='This shift has been swapped'  position="RightCenter">
+                    <TooltipComponent ref={tooltipInstance} cssClass='shift-management-tooltip' content='This shift has been swapped' position="RightCenter">
                         <span
                             ref={iconRef}
                             className="e-swapped e-icons sf-icon-replace-accepted"
-                            style={{ 
+                            style={{
                                 cursor: 'pointer'
-                             }}
+                            }}
                         ></span>
                     </TooltipComponent>
                 );
@@ -583,9 +579,9 @@ function App() {
             ReactDOM.createRoot(reactContainer).render(<ShiftSwappedIconWithTooltip />);
         }
 
-        if (args.element.classList.contains('day-shift') && args.element.classList.contains('e-overtime') && args.element.querySelector('.e-right-icon')) {
-            args.element.querySelector('.e-right-icon').remove();
-        }
+        // if (scheduleObj.current.currentView === 'Agenda') {
+        //     args.element.querySelector('.e-icon-element')?.remove();
+        // }
         return;
     };
 
@@ -823,9 +819,9 @@ function App() {
     const onNavigating = (args) => {
         let scheduleToolbar = scheduleObj.current.element.querySelector('.e-schedule-toolbar-container');
         if (args.currentView === 'Agenda') {
-            setEmployeesNames([]);
-            setDdlValue('');
-            setChipSelection(0);
+            // setEmployeesNames([]);
+            // setDdlValue('');
+            // setChipSelection(0);
             enableAgendaToolbar();
             const toolbarElement = toolbarRef.current.element;
             scheduleToolbar.appendChild(toolbarElement);
@@ -968,49 +964,6 @@ function App() {
         );
 
     }
-
-    let ddl1 = [
-        { id: "en-US USD", name: 'English' },
-        { id: "de EUR", name: 'German' },
-        { id: "fr-CH CHF", name: 'French' },
-        { id: "ar AED", name: 'Arabic' },
-        { id: "zh CNY", name: 'Chinese' }
-    ];
-
-    let ddl2 = [
-        { id: 'USD', name: 'USD' },
-        { id: 'EUR', name: 'EUR' },
-        { id: 'AED', name: 'AED' },
-        { id: 'CHF', name: 'CHF' },
-        { id: 'CNY', name: 'CNY' }
-    ]
-
-    const onDdl1Change = (args) => {
-        const localeOption = args.value.split(' ');
-        if (localeOption[0] === 'ar') {
-            setRtl(true);
-        } else {
-            setRtl(false);
-        }
-        if (scheduleObj.current) {
-            scheduleObj.current.locale = localeOption[0];
-        }
-        // setCulture(localeOption[0]);
-        // setCurrencyCode(localeOption[1]);
-        // enableRtl(localeOption[0].startsWith('ar'));
-        // scheduleObj.dataBind();
-        // applyFormats();
-    }
-
-    const onDdl2Change = (args) => {
-        setCurrencyCode(args.value);
-
-        // const localeOption = scheduleObj.current.locale.split(' ');
-        // if (scheduleObj.current) {
-        //     scheduleObj.current.locale = localeOption[0] + ' ' + args.value;
-        // }
-    }
-
     const loadLocalization = () => {
         L10n.load(Locale.getLocaleObj());
         const localeCollection = ['ar', 'de', 'en', 'fr-CH', 'zh'];
@@ -1019,7 +972,7 @@ function App() {
 
     loadLocalization();
 
-    const onPopupOpen =(args) => {
+    const onPopupOpen = (args) => {
         if ((args.type === 'QuickInfo' && (args.data.IsReadonly || args.target?.classList.contains('e-work-cells') || isPreventQuickInfo)) || (args.type === 'Editor' && !isTreeItemDropped)) {
             args.cancel = true;
             isPreventQuickInfo = false;
@@ -1051,43 +1004,14 @@ function App() {
 
 
     return (<div className='schedule-control-section'>
-        <div className='e-localization'>
-            <div className='e-culture'>
-                <div className="title-text">Localization</div>
-                <DropDownListComponent
-                    dataSource={ddl1}
-                    fields={{ text: 'name', value: 'id' }}
-                    placeholder="Select Localization"
-                    value='en-US USD'
-                    change={onDdl1Change}
-                />
-            </div>
-
-            <div className='e-currency'>
-
-                <div className="title-text">Currency</div>
-
-                <DropDownListComponent
-                    dataSource={ddl2}
-                    fields={{ text: 'name', value: 'id' }}
-                    placeholder="Select Currency"
-                    value='USD'
-                    change={onDdl2Change}
-                />
-            </div>
-        </div>
-        <div className='col-lg-12 control-section'>
-            <div className='content-wrapper drag-sample-wrapper'>
-                {/* <div className="title-container">
-                        <h1 className="title-text">Employee Shift Management</h1>
-                    </div> */}
+            <div className='content-wrapper shift-management-sample-wrapper'>
                 <ScheduleComponent
                     ref={scheduleObj}
                     locale='en-US'
                     enableRtl={isRtl}
                     currentView="TimelineWeek"
                     selectedDate={selectedDate}
-                    cssClass='schedule-drag-drop'
+                    cssClass='schedule-shift-management'
                     width='100%'
                     height='100%'
                     startHour="07:00"
@@ -1109,12 +1033,10 @@ function App() {
                     editorHeaderTemplate={editorHeaderTemplate}
                     popupOpen={onPopupOpen}
                 >
-
                     <ViewsDirective>
                         <ViewDirective option="TimelineWeek" />
                         <ViewDirective option='Agenda' eventTemplate={agendaTemplate} />
                     </ViewsDirective>
-
                     <ResourcesDirective>
                         <ResourceDirective
                             field="RoleId"
@@ -1155,49 +1077,48 @@ function App() {
                             </ChipsDirective>
                         </ChipListComponent>
                     </div>
-                    <TreeViewComponent ref={treeObj1} enableRtl={isRtl} id="treeview1" cssClass='treeview-external-drag' style={{ display: 'block' }} dragArea=".drag-sample-wrapper" nodeTemplate={treeTemplate} fields={fields1} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
-                    <TreeViewComponent ref={treeObj2} enableRtl={isRtl} id="treeview2" cssClass='treeview-external-drag' style={styleNone} dragArea=".drag-sample-wrapper" nodeTemplate={treeTemplate} fields={fields2} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
-                    <TreeViewComponent ref={treeObj3} enableRtl={isRtl} id="treeview3" cssClass='treeview-external-drag' style={styleNone} dragArea=".drag-sample-wrapper" nodeTemplate={treeTemplate} fields={fields3} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
-                    <TreeViewComponent ref={treeObj4} enableRtl={isRtl} id="treeview4" cssClass='treeview-external-drag' style={styleNone} dragArea=".drag-sample-wrapper" nodeTemplate={treeTemplate} fields={fields4} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
+                    <TreeViewComponent ref={treeObj1} enableRtl={isRtl} id="treeview1" cssClass='treeview-external-drag' style={{ display: 'block' }} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields1} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
+                    <TreeViewComponent ref={treeObj2} enableRtl={isRtl} id="treeview2" cssClass='treeview-external-drag' style={styleNone} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields2} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
+                    <TreeViewComponent ref={treeObj3} enableRtl={isRtl} id="treeview3" cssClass='treeview-external-drag' style={styleNone} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields3} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
+                    <TreeViewComponent ref={treeObj4} enableRtl={isRtl} id="treeview4" cssClass='treeview-external-drag' style={styleNone} dragArea=".shift-management-sample-wrapper" nodeTemplate={treeTemplate} fields={fields4} nodeDragStop={onTreeDragStop} nodeSelecting={onItemSelecting} nodeDragging={onTreeDrag} nodeDragStart={onTreeDragStart} allowDragAndDrop={allowDragAndDrops} />
+                </div>
+                <div>
+                    <ToolbarComponent ref={toolbarRef} enableRtl={isRtl} cssClass={`agenda-toolbar ${scheduleObj.currentView !== "Agenda" ? 'e-hidden' : ''}`}>
+                        <ItemsDirective>
+                            <ItemDirective cssClass='tooltip-chips' type="Input" template={getChips} overflow="Show" align="Left" />
+                            <ItemDirective cssClass='tooltip-ddl' type="Input" template={getDdl} overflow="Show" align="Right" />
+                        </ItemsDirective>
+                    </ToolbarComponent>
+                </div>
+                <div id="target" className="col-lg-8">
+                    <DialogComponent ref={dialogInstance} enableRtl={isRtl} id="modalDialog" cssClass='swap-dialog' height='240px' width='378px' isModal={true} buttons={buttons} header="Shift swap" target="#target" visible={status} open={dialogOpen} close={dialogClose} animationSettings={animationSettings}>
+                        <div className='e-shift-swap'>
+                            <div>
+                                <label>Select an employee(Available for swapping)</label>
+                                <DropDownListComponent
+                                    ref={nameDropdownListRef}
+                                    dataSource={employeeList}
+                                    fields={{ text: 'name', value: 'id' }}
+                                    change={dropDownListChange1}
+                                    placeholder="Select an employee"
+                                />
+                            </div>
+
+                            <div style={{ marginTop: '10px' }}>
+                                <label>Select shift</label>
+                                <DropDownListComponent
+                                    ref={shiftDropdownListRef}
+                                    dataSource={shiftList}
+                                    fields={{ text: 'name', value: 'id' }}
+                                    placeholder="Select shift"
+                                    change={dropDownListChange2}
+                                />
+                            </div>
+                        </div>
+                    </DialogComponent>
                 </div>
             </div>
-            <div>
-                <ToolbarComponent ref={toolbarRef} enableRtl={isRtl} cssClass={`agenda-toolbar ${scheduleObj.currentView !== "Agenda" ? 'e-hidden' : ''}`}>
-                    <ItemsDirective>
-                        <ItemDirective cssClass='tooltip-chips' type="Input" template={getChips} overflow="Show" align="Left" />
-                        <ItemDirective cssClass='tooltip-ddl' type="Input" template={getDdl} overflow="Show" align="Right" />
-                    </ItemsDirective>
-                </ToolbarComponent>
-            </div>
         </div>
-        <div id="target" className="col-lg-8">
-                <DialogComponent ref={dialogInstance} enableRtl={isRtl} id="modalDialog" cssClass='swap-dialog' height='240px' width='378px' isModal={true} buttons={buttons} header="Shift swap" target="#target" visible={status} open={dialogOpen} close={dialogClose} animationSettings={animationSettings}>
-                    <div className='e-shift-swap'>
-                        <div>
-                            <label>Select an employee(Available for swapping)</label>
-                            <DropDownListComponent
-                                ref={nameDropdownListRef}
-                                dataSource={employeeList}
-                                fields={{ text: 'name', value: 'id' }}
-                                change={dropDownListChange1}
-                                placeholder="Select an employee"
-                            />
-                        </div>
-
-                        <div style={{ marginTop: '10px' }}>
-                            <label>Select shift</label>
-                            <DropDownListComponent
-                               ref={shiftDropdownListRef}
-                                dataSource={shiftList}
-                                fields={{ text: 'name', value: 'id' }}
-                                placeholder="Select shift"
-                                change={dropDownListChange2}
-                            />
-                        </div>
-                    </div>
-                </DialogComponent>
-            </div>
-    </div>
     );
 }
 

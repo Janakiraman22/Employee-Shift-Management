@@ -9,243 +9,551 @@
 @import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
 
+.schedule-control-section {
 
-.schedule-control-section .content-wrapper {
-    height: 600px;
-    width: 100%;
+    .shift-management-sample-wrapper {
+        display: flex;
+        height: 600px;
+        width: 100%;
+
+        .schedule-shift-management {
+            border: 1px solid #C4C7C5;
+            border-radius: 12px;
+            margin-right: 12px;
+
+            .e-table-wrap.e-timeline-view {
+
+                .e-resource-cells.e-parent-node,
+                .e-work-cells.e-resource-group-cells {
+                    height: 30px;
+                }
+
+                .e-resource-cells.e-child-node,
+                .e-work-cells:not(.e-resource-group-cells) {
+                    height: 60px;
+                }
+
+                .e-resource-left-td {
+                    width: 237px;
+                }
+
+                .e-resource-column-wrap {
+                    .e-resource-cells.e-parent-node {
+                        background-color: #dcdbdb;
+                    }
+                }
+
+                .e-content-wrap {
+
+                    .e-resource-group-cells {
+                        background-color: #dcdbdb;
+                    }
+
+                    .e-appointment-wrapper {
+
+                        .e-appointment.day-shift {
+                            background-color: #0875B8;
+                        }
+
+                        .e-appointment.night-shift {
+                            background-color: #633DD0;
+                        }
+
+                        .e-appointment.event-swapped {
+                            background-color: #FFA500;
+                        }
+
+                        .e-appointment.event-leave:not(.e-read-only) {
+                            border: 1px dotted #B3261E !important;
+                            background-color: #F9DEDC !important;
+
+                            div {
+                                color: #1C1B1F;
+                            }
+
+                            .e-leave.e-icons {
+                                color: #C70404;
+                            }
+                        }
+
+                        .e-appointment {
+                            height: 45px !important;
+                            border-radius: 8px;
+
+                            .e-icon-element {
+                                display: flex !important;
+                                align-items: center;
+                                justify-content: space-between;
+                            }
+
+                            .e-leave::before {
+                                content: '\e607';
+                            }
+
+                            .e-swap.e-icons,
+                            .e-swapped.e-icons,
+                            .e-replaced.e-icons,
+                            .e-leave.e-icons {
+                                font-size: 18px;
+                            }
+
+                            .template-wrap {
+                                padding: 4px;
+                                display: flex;
+
+                                .specialist-image.alice {
+                                    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/alice.png');
+                                }
+
+                                .specialist-image.robert {
+                                    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/robert.png');
+                                }
+
+                                .specialist-image.robson {
+                                    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/robson.png');
+                                }
+
+                                .specialist-image.laura {
+                                    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/laura.png');
+                                }
+
+                                .specialist-image.nancy {
+                                    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/nancy.png');
+                                }
+
+                                .specialist-image.margaret {
+                                    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/margaret.png');
+                                }
+
+                                .e-staff {
+                                    height: 32px;
+                                    display: flex;
+                                    margin-top: 2px;
+
+                                    .staff-image {
+                                        background-color: #FFFFFF;
+                                        height: 32px;
+                                        width: 32px;
+                                        border-radius: 50%;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        font-family: 'Roboto';
+                                        line-height: 20px;
+                                        letter-spacing: 0.1px;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        margin-right: 6px;
+                                    }
+
+                                    .staff-info {
+                                        height: 32px;
+
+                                        .e-name {
+                                            font-family: 'Roboto';
+                                            font-weight: 500;
+                                            font-size: 13px;
+                                            line-height: 18px;
+                                            letter-spacing: 0.1px;
+                                        }
+
+                                        .e-designation {
+                                            font-family: 'Roboto';
+                                            font-weight: 400;
+                                            font-size: 11px;
+                                            line-height: 14px;
+                                            letter-spacing: 0.1px;
+                                        }
+                                    }
+                                }
+
+                                .e-time {
+                                    font-family: 'Roboto';
+                                    font-weight: 400;
+                                    font-size: 12px;
+                                    line-height: 16px;
+                                    letter-spacing: 0.1px;
+                                }
+                            }
+
+                            .sf-icon-replace-request,
+                            .sf-icon-replace-accepted,
+                            .sf-icon-user-replace {
+                                display: flex;
+                            }
+                        }
+
+                        .e-appointment.e-read-only {
+                            background-color: #F1F2F3 !important;
+
+                            .staff-image {
+                                background-color: #CACACA !important;
+                                opacity: 50%;
+                            }
+
+                            .staff-info {
+                                color: #AEAEAE !important;
+                            }
+                        }
+
+                        .e-appointment:not(.event-leave):not(.e-read-only) {
+
+                            .staff-info {
+                                color: #FFFFFF;
+                            }
+
+                            .staff-image {
+                                color: #1C1B1F !important;
+                            }
+                        }
+
+                        .e-appointment.event-swapped {
+
+                            .staff-info,
+                            .e-time,
+                            .sf-icon-replace-accepted {
+                                color: #1C1B1F !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .e-table-wrap.e-agenda-view {
+                .e-agenda-item {
+                    padding: 12px 0;
+
+                    .e-appointment {
+
+                        .agenda-event {
+                            padding: 8px 0px;
+
+                            .e-staff {
+                                display: flex;
+                                align-items: center;
+
+                                .staff-image {
+                                    background-color: #6750A4;
+                                    height: 40px;
+                                    width: 40px;
+                                    border-radius: 50%;
+                                    color: #FFFFFF;
+                                    font-size: 16px;
+                                    font-weight: 500;
+                                    font-family: 'Roboto';
+                                    line-height: 20px;
+                                    letter-spacing: 0.1px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                .staff-name {
+                                    color: #1C1B1F;
+                                    font-family: 'Roboto';
+                                    font-weight: 500;
+                                    font-size: 16px;
+                                    line-height: 24px;
+                                    letter-spacing: 0px;
+                                }
+
+                                .staff-role,
+                                .staff-designation,
+                                .staff-availability,
+                                .event-time {
+                                    font-family: 'Roboto';
+                                    font-weight: 400;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    letter-spacing: 0.24px;
+                                }
+
+                                .staff-role,
+                                .staff-designation,
+                                .staff-availability {
+                                    color: #1C1B1F;
+                                }
+
+                                .event-time {
+                                    color: #49454E;
+                                }
+
+                                .staff-availability {
+                                    color: #C70404;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .e-resource-column {
+                    display: none;
+                }
+            }
+
+            .e-schedule-toolbar-container {
+
+                .agenda-toolbar {
+                    border-bottom: 1px solid #C4C7C5;
+
+                    .e-chip-list .e-chip.e-outline {
+                        height: 32px;
+                        border-radius: 16px;
+                        min-width: 41px;
+                    }
+                }
+            }
+        }
+
+        .schedule-shift-management:not(.e-rtl) {
+
+            .e-agenda-view .staff-image {
+                margin-right: 9px;
+            }
+
+            .e-appointment.e-template {
+                display: block;
+                padding-left: 19px !important;
+            }
+
+            .e-appointment {
+
+                .e-swap.e-icons,
+                .e-swapped.e-icons,
+                .e-replaced.e-icons,
+                .e-leave.e-icons {
+                    margin-right: 8px;
+                }
+            }
+        }
+
+        .treeview-container {
+            border: 1px solid #C4C7C5;
+            border-radius: 12px;
+
+            .title-text {
+                height: 32px;
+                position: relative;
+            }
+
+            .title-text span {
+                bottom: 0;
+                color: #49454E;
+                font-family: 'Roboto';
+                font-size: 16px;
+                font-weight: 500;
+                letter-spacing: 0.1px;
+                line-height: 20px;
+                position: absolute;
+            }
+
+            .role-tabs .e-chip-list {
+                flex-wrap: nowrap;
+                padding: 14px 4px 14px 4px;
+                height: 68px;
+
+                .e-chip.e-outline {
+                    height: 32px;
+                    border-radius: 16px;
+                    min-width: 41px;
+                }
+            }
+
+            .treeview-external-drag.e-control {
+                height: 100%;
+
+                .e-list-parent {
+                    height: 100%;
+
+                    .e-list-item {
+                        height: 48px;
+                        padding: 0;
+
+                        .e-fullrow {
+                            height: 48px;
+                        }
+
+                    }
+                }
+            }
+
+            .treeview-external-drag.e-rtl {
+
+                .employee-image {
+                    margin: 6px 0px 6px 12px;
+                }
+
+                .title-text span {
+                    margin-right: 12px;
+                }
+            }
+        }
+
+        .treeview-container:not(.e-rtl) .title-text span {
+            margin-left: 12px;
+        }
+
+        .e-chip-text {
+            font-family: 'Roboto';
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.1px;
+            line-height: 18px;
+            text-align: center;
+        }
+
+        .e-dialog.swap-dialog {
+
+            .e-dlg-header-content {
+                height: 52px;
+
+                .e-dlg-header {
+                    color: #1C1B1F;
+                    font-family: 'Roboto';
+                    font-size: 16px;
+                    font-weight: 400;
+                    letter-spacing: 0.15px;
+                    line-height: 20px;
+                }
+            }
+
+            .e-dlg-content {
+                height: 154px;
+            }
+
+            .e-dlg-content label {
+                color: #49454E;
+                font-family: 'Roboto';
+                font-size: 10px;
+                font-weight: 400;
+                letter-spacing: 0.1px;
+                line-height: 12px;
+            }
+
+            .e-dlg-content input {
+                color: #1C1B1F;
+                font-family: 'Roboto';
+                font-size: 14px;
+                font-weight: 400;
+                letter-spacing: 0.24px;
+                line-height: 20px;
+            }
+
+            .e-footer-content {
+                height: 60px;
+
+                .e-btn {
+                    font-family: 'Roboto';
+                    font-size: 12px;
+                    font-weight: 500;
+                    letter-spacing: 0.5px;
+                    line-height: 16px;
+                }
+
+                .e-btn:not(:disabled) {
+                    color: #6750A4;
+                }
+            }
+        }
+    }
+
+    .e-rtl.schedule-shift-management {
+        .role-template-wrap {
+            .role-image {
+                margin: 0 0 0 6px;
+            }
+        }
+
+        .e-table-wrap:not(.e-agenda-view) .e-appointment {
+            .template-wrap {
+                .e-staff {
+                    .staff-image {
+                        margin: 0 0 0 6px;
+                    }
+                }
+            }
+        }
+
+        .e-appointment {
+
+            .e-swap.e-icons,
+            .e-swapped.e-icons,
+            .e-replaced.e-icons,
+            .e-leave.e-icons {
+                margin-left: 8px;
+            }
+        }
+
+        .e-agenda-view .staff-image {
+            margin-left: 9px;
+        }
+
+        .e-appointment.e-template {
+            padding-right: 19px !important;
+        }
+    }
 }
 
-.control-section {
-    height: 100%;
-    width: 100%;
+
+
+.shift-management-sample-wrapper .e-treeview.treeview-external-drag,
+.e-drag-item.e-treeview.treeview-external-drag {
+    .e-text-content {
+        padding: 0;
+
+        .e-list-text {
+            height: 46px;
+            line-height: 15px !important;
+            padding: 0 5px;
+            width: 220px;
+
+            #waitdetails {
+                display: flex;
+                align-items: center;
+                width: 95%;
+                float: left;
+                height: 100%;
+                padding: 0;
+
+                .employee-image {
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 25px;
+                    margin: 6px 12px 6px 0;
+                }
+            }
+
+            #waitlist {
+                color: #1C1B1F;
+                font-family: 'Roboto';
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 18px;
+                letter-spacing: 0.1px;
+                margin: 5px 0 2px 0;
+            }
+
+            #waitcategory {
+                color: #49454E;
+                font-family: 'Roboto';
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 18px;
+                letter-spacing: 0.1px;
+            }
+        }
+    }
 }
 
-.e-parent-node {
-    background-color: #dcdbdb !important;
-}
-
-.e-schedule .e-timeline-view .e-resource-group-cells {
-    background-color: #dcdbdb !important;
-}
-
-
-.e-schedule-table .e-appointment.day-shift {
-    background-color: #0875B8;
-}
-
-.e-schedule-table .e-appointment.night-shift {
-    background-color: #633DD0;
-}
-
-.e-schedule-table .e-appointment.event-swapped {
-    background-color: #FFA500;
-}
-
-
-.e-schedule-table .e-appointment.e-half-leave {
-    /* opacity: 0.6;  */
-    background-color: #d7d6d6 !important;
-    color: black;
-    /* border: 2px dashed red; */
-}
-
-.e-schedule-table .e-appointment.e-permission {
-    /* opacity: 0.6;  */
-    background-color: #d7d6d6 !important;
-    color: black;
-    /* border: 2px dashed red; */
-}
-
-
-.e-image {
-    margin: -25px 0 0 1px;
-}
-
-.e-schedule-table .e-appointment.event-leave .e-leave {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: #AEAEAE;
-    margin-right: 12px;
-}
-
-.e-schedule-table .e-appointment.event-leave:not(.e-read-only) .e-leave {
-    color: #C70404;
-}
-
-
-
-/* .e-schedule-table .e-appointment.event-swap .e-swap,
-.e-schedule-table .e-appointment.event-swapped .e-swapped,
-.e-schedule-table .e-appointment.e-covers .e-replaced {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: white;
-    margin-right: 12px;
-} */
-
-.e-schedule-table .e-appointment.event-leave .e-leave::before {
-    content: '\e607';
-}
-
-/* .e-schedule-table .e-appointment.event-swap .e-swap::before {
-    content: '\e666';
-} */
-
-.e-past-app {
-    background-color: rgb(14, 118, 50) !important;
-}
-
-
-.drag-sample-wrapper {
-    display: -ms-flexbox;
-    display: flex;
-
-    height: 700px;
-    width: 100%;
-}
-
-
-.treeview-external-drag.e-control {
-    height: 100%;
-}
-
-
-.treeview-external-drag #waitdetails {
-    display: flex;
-    align-items: center;
-    width: 95%;
-    float: left;
-    height: 100%;
-    padding: 0;
-}
-
-
-.treeview-external-drag #waitlist {
-    color: #1C1B1F;
-    font-family: 'Roboto';
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 18px;
-    letter-spacing: 0.1px;
-    margin: 5px 0 2px 0;
-}
-
-.treeview-external-drag #waitcategory {
-    color: #49454E;
-    font-family: 'Roboto';
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 18px;
-    letter-spacing: 0.1px;
-}
-
-.treeview-external-drag .e-list-text,
-.treeview-external-drag.e-rtl .e-list-text,
-.e-bigger .treeview-external-drag .e-list-text,
-.e-bigger .treeview-external-drag.e-rtl .e-list-text {
-    height: 46px;
-    line-height: 15px !important;
-    padding: 0 5px;
-    width: 220px;
-}
-
-.treeview-external-drag .e-list-parent,
-.treeview-external-drag.e-rtl .e-list-parent,
-.e-bigger .treeview-external-drag .e-list-parent,
-.e-bigger .treeview-external-drag.e-rtl .e-list-parent {
-    height: 100%;
-}
-
-.treeview-external-drag .e-list-item,
-.e-bigger .treeview-external-drag .e-list-item {
-    height: 48px;
-    padding: 0;
-}
-
-.treeview-external-drag .e-fullrow,
-.e-bigger .treeview-external-drag .e-fullrow {
-    height: 48px;
-}
-
-.treeview-external-drag .e-list-item.e-hover>.e-fullrow,
-.treeview-external-drag .e-list-item.e-active>.e-fullrow,
-.treeview-external-drag .e-list-item.e-active.e-hover>.e-fullrow,
-.e-bigger .treeview-external-drag .e-list-item.e-hover>.e-fullrow,
-.e-bigger .treeview-external-drag .e-list-item.e-active>.e-fullrow,
-.e-bigger .treeview-external-drag .e-list-item.e-active.e-hover>.e-fullrow {
-    background-color: transparent;
-    border-color: transparent;
-    box-shadow: none !important;
-}
-
-.fluent2-highcontrast .treeview-external-drag .e-list-item.e-hover>.e-text-content .e-list-text {
-    color: #fff;
-}
-
-.treeview-external-drag .e-text-content,
-.e-bigger .treeview-external-drag .e-text-content,
-.treeview-external-drag.e-rtl .e-text-content,
-.e-bigger .treeview-external-drag.e-rtl .e-text-content {
-    padding: 0;
-    background-color: inherit;
-}
-
-.e-drag-item.e-treeview.treeview-external-drag,
-.e-bigger .e-drag-item.e-treeview.treeview-external-drag {
-    padding: 0 !important;
-}
-
-.e-schedule.schedule-drag-drop .e-timeline-view .e-resource-left-td,
-.e-schedule.schedule-drag-drop .e-timeline-month-view .e-resource-left-td {
-    width: 237px;
-}
-
-
-.e-schedule.schedule-drag-drop .specialist-image {
-    width: 45px;
-    height: 40px;
-    float: left;
-    border-radius: 50%;
-    margin-right: 10px;
-    background-repeat: no-repeat;
-    background-size: 45px;
-}
-
-.e-device-hover {
-    background-color: #e0e0e0 !important;
-}
-
-
-.schedule-drag-drop.e-schedule .template-wrap .specialist-image.alice {
-    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/alice.png');
-}
-
-.schedule-drag-drop.e-schedule .template-wrap .specialist-image.robert {
-    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/robert.png');
-}
-
-.schedule-drag-drop.e-schedule .template-wrap .specialist-image.robson {
-    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/robson.png');
-}
-
-.schedule-drag-drop.e-schedule .template-wrap .specialist-image.laura {
-    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/laura.png');
-}
-
-.schedule-drag-drop.e-schedule .template-wrap .specialist-image.nancy {
-    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/nancy.png');
-}
-
-.schedule-drag-drop.e-schedule .template-wrap .specialist-image.margaret {
-    background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/margaret.png');
+.e-drag-item.e-treeview.treeview-external-drag {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    /* Blurred border effect */
+    border-radius: 4px;
 }
 
 @media (max-width: 550px) {
-    .drag-sample-wrapper {
+    .shift-management-sample-wrapper {
         display: block;
     }
 
@@ -271,528 +579,16 @@
     display: none;
 }
 
-
-
-
-
-
-
-.e-control.e-schedule {
-    border: 1px solid #C4C7C5;
-    border-radius: 12px;
-    margin-right: 12px;
-}
-
-.schedule-drag-drop .e-table-wrap:not(.e-agenda-view ) .e-appointment {
-    border-radius: 8px;
-
-    .template-wrap {
-        .e-staff {
-                height: 32px;
-        
-                .staff-image {
-                    height: 32px;
-                    width: 32px;
-        
-                    border-radius: 50%;
-                    font-size: 16px;
-                    font-weight: 500;
-                    font-family: 'Roboto';
-                    line-height: 20px;
-                    letter-spacing: 0.1px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin-right: 6px;
-                }
-
-            .staff-info {
-                height: 32px;
-
-                .e-name {
-                    font-family: 'Roboto';
-                    font-weight: 500;
-                    font-size: 13px;
-                    line-height: 18px;
-                    letter-spacing: 0.1px;
-                }
-
-                .e-designation {
-                    font-family: 'Roboto';
-                    font-weight: 400;
-                    font-size: 11px;
-                    line-height: 14px;
-                    letter-spacing: 0.1px;
-                }
-                
-            }
-        }
-
-                .e-time {
-                    font-family: 'Roboto';
-                    font-weight: 400;
-                    font-size: 12px;
-                    line-height: 16px;
-                    letter-spacing: 0.1px;
-                }
-    }
-
-    .sf-icon-replace-request,
-    .sf-icon-replace-accepted,
-    .sf-icon-user-replace {
-        display: flex;
-    align-items: center;
-    justify-content: center;
-    }
-}
-
-
-.schedule-drag-drop .e-table-wrap.e-agenda-view  .e-agenda-item {
-    padding: 12px 0;
-}
-
-
-
-.e-appointment.e-template  {
-    height: 56px !important;
-}
-
-.template-wrap {
-    padding: 4px;
-        display: flex;
-        flex-direction: column; /* Stack the image/info and shift time vertically */
-}
-
-.agenda-event {
-    display: flex;
-    align-items: flex-start; /* Align items at the top */
-    justify-content: flex-start; /* Start items from the left */
-}
-
-.schedule-drag-drop .e-table-wrap:not(.e-agenda-view ) .e-staff {
-    display: flex;
-    align-items: center; /* Aligns image and info horizontally */
-    margin-top: 2px; /* Adds spacing below the staff section */
-}
-
-.schedule-drag-drop .e-table-wrap.e-agenda-view {
-    .agenda-event {
-        padding: 8px 0px;
-
-        .e-staff {
-            display: flex;
-            align-items: center;
-            /* Aligns image and info horizontally */
-
-            .staff-name {
-                    color: #1C1B1F;
-                    font-family: 'Roboto';
-                    font-weight: 500;
-                    font-size: 16px;
-                    line-height: 24px;
-                    letter-spacing: 0px;
-                }
-            
-                .staff-role,
-                .staff-designation,
-                .staff-availability {
-                    color: #1C1B1F;
-                    font-family: 'Roboto';
-                    font-weight: 400;
-                    font-size: 14px;
-                    line-height: 20px;
-                    letter-spacing: 0.24px;
-                }
-
-                .staff-availability {
-                    color: #C70404;
-                }
-            
-                .event-time {
-                    color: #49454E;
-                    font-family: 'Roboto';
-                    font-weight: 400;
-                    font-size: 14px;
-                    line-height: 20px;
-                    letter-spacing: 0.24px;
-                }
-        }
-    }
-}
-
-
-.e-table-wrap:not(.e-agenda-view) .staff-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.e-name {
-    font-size: 11px;
-}
-
-.e-disignation {
-    font-size: 11px;
-}
-
-.e-time {
-    font-size: 11px;
-}
-
-.e-appointment.event-leave:not(.e-read-only) {
-    border: 1px dotted #B3261E !important;
-    background-color: #F9DEDC !important;
-    div {
-       color: #1C1B1F;
-    }
-}
-
-.e-appointment.event-leave.e-read-only {
-    border: 1px dotted #AEAEAE !important;
-}
-
-/* .e-schedule .e-timeline-view .e-resource-cells {
-    vertical-align: top;
-    padding: 12px 0 0 12px;
-
-} */
-
-.role-template-wrap {
-    display: flex;
-    flex-direction: column;
-  
-  
-  .e-role {
-    display: flex;
-    align-items: center;  /* Aligns the image and text vertically */
-  }
-  
-  .role-image {
-    height: 48px;
-    width: 48px;
-    margin-right: 6px;
-  }
-  
-  .role-text {
-    color: #1C1B1F;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: 0.1px;
-    font-weight: 500;
-    font-family: 'Roboto';
-    width: 57px;
-  }
-}
-
-.treeview-container {
-    border: 1px solid #C4C7C5;
-    border-radius: 12px;
-}
-
-
-.treeview-container .title-text {
-    height: 32px;
-    position: relative;
-}
-
-.treeview-container .title-text span {
-    bottom: 0;
-    color: #49454E;
-    font-family: 'Roboto';
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.1px;
-    line-height: 20px;
-    position: absolute;
-}
-
-.treeview-container:not(.e-rtl) .title-text span {
-    margin-left: 12px;
-}
-
-.e-chip-text {
-        font-family: 'Roboto';
-        font-size: 14px;
-        font-weight: 500;
-        letter-spacing: 0.1px;
-        line-height: 18px;
-        text-align: center;
-}
-
-.treeview-container .role-tabs .e-chip-list {
-    flex-wrap: nowrap;
-    padding: 14px 4px 14px 4px;
-    height: 68px;
-
-    .e-chip.e-outline {
-       height: 32px;
-       border-radius: 16px;
-       min-width: 41px;
-    }
-}
-
-.e-schedule-toolbar-container .agenda-toolbar .e-chip-list .e-chip.e-outline {
-    height: 32px;
-    border-radius: 16px;
-    min-width: 41px;
-}
-
-
-.treeview-external-drag.e-hide {
-    display: none;
-}
-
-.text-container {
-    display: flex;
-    flex-direction: column; /* Stack text elements vertically */
-}
-
-.treeview-external-drag .employee-image {
-    width: 36px;
-    height: 36px;
-    border-radius: 25px;
-}
-
-.treeview-external-drag:not(.e-rtl) .employee-image {
-    margin: 6px 12px 6px 0;
-}
-
-
-
-.e-dialog.swap-dialog {
-
-    .e-dlg-header-content {
-        height: 52px;
-
-    .e-dlg-header {
-        color: #1C1B1F;
-        font-family: 'Roboto';
-        font-size: 16px;
-        font-weight: 400;
-        letter-spacing: 0.15px;
-        line-height: 20px;
-    }
-}
-
-.e-dlg-content {
-    height: 154px;
-}
-
-.e-dlg-content label {
-    color: #49454E;
-    font-family: 'Roboto';
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.1px;
-    line-height: 12px;
-}
-
-.e-dlg-content input {
-    color: #1C1B1F;
-    font-family: 'Roboto';
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.24px;
-    line-height: 20px;
-}
-
-.e-footer-content {
-    height: 60px;
-
-    .e-btn {
-        font-family: 'Roboto';
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        line-height: 16px;
-    }
-
-    .e-btn:not(:disabled) {
-        color: #6750A4;
-    }
-}
-}
-
-
-
-.e-appointment.e-read-only {
-    background-color: #F1F2F3 !important;
-    
-    .staff-image {
-        background-color: #CACACA !important;
-        opacity: 50%;
-    }
-}
-
-.e-appointment.e-read-only:not(.event-leave) {
-    color: #F1F2F3 !important;
-}
-
-.e-table-wrap:not(.e-agenda-view) .e-appointment:not(.event-leave):not(.e-read-only) {
-    .staff-info,
-    .e-time {
-        color: #FFFFFF;
-    }
-    
-    .staff-image {
-        color: #1C1B1F !important;
-    }
-}
-
-.e-table-wrap:not(.e-agenda-view) .e-appointment.event-swapped {
-    .staff-info,
-    .e-time,
-    .sf-icon-replace-accepted {
-        color: #1C1B1F !important;
-    }
-}
-
-.e-appointment.e-read-only {
-    .staff-info,
-    .e-time {
-        color: #AEAEAE !important;
-    }
-}
-
-.schedule-drag-drop.e-schedule .e-table-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.agenda-toolbar {
-    border-bottom: 1px solid #C4C7C5;
-    /* border: 0;
-    border-bottom: 0;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-    margin-bottom: 3px; */
-}
-
-.e-schedule-table .e-appointment {
-    height: 45px !important;
-}
-
-.e-appointment.day-shift {
-    background-color: #0875B8;
-    color: #8BEE56;
-}
-
-
-.e-appointment.day-shift {
-    background-color: #633DD0;
-    color: #FFAF40;
-}
-
-.e-appointment.day-shift .staff-image {
-    /* background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/alice.png'); */
-    background-color: white;
-}
-
-.e-appointment.night-shift .staff-image {
-    /* background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/alice.png'); */
-    background-color: white;
-}
-
-.e-appointment.on-call-shift .staff-image {
-    background-color: #C0ACF9;
-}
-
-.e-appointment.event-leave:not(.e-read-only) .staff-image {
-    background-color: #C2C0C0;
-    color: #1C1B1F;
-}
-
-.e-agenda-view .staff-image {
-    background-color: #6750A4;
-        height: 40px;
-        width: 40px;
-    
-        border-radius: 50%;
-        color: #FFFFFF;
-        font-size: 16px;
-        font-weight: 500;
-        font-family: 'Roboto';
-        line-height: 20px;
-        letter-spacing: 0.1px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-}
-
-.schedule-drag-drop .e-right-icon {
-    position: absolute;
-    top: 5px;
-    font-size: 9px !important;
-    font-weight: 400;
-    line-height: 100% !important;
-    letter-spacing: 0%;
-}
-
-.schedule-drag-drop:not(.e-rtl) {
-
-  .e-right-icon {
-    right: 5px;
-    padding: 2px 2px 0 0;
- }
-
- .e-agenda-view .staff-image {
-    margin-right: 9px;
- }
-
- .e-appointment.e-template  {
-    padding-left: 19px !important;
-}
-}
-
-
-
-.schedule-drag-drop .e-agenda-view .e-resource-column {
-    display: none;
-}
-
-
-/* .e-table-wrap:not(.e-agenda-view) .e-content-table tr:first-child td:first-child {
-    height: 292px;
-}
-
-.e-table-wrap:not(.e-agenda-view) .e-content-table tr:nth-child(2) td:first-child,
-.e-table-wrap:not(.e-agenda-view) .e-content-table tr:nth-child(3) td:first-child {
-    height: 192px;
-}
-
-.e-table-wrap:not(.e-agenda-view) .e-resource-column-table tr:first-child td:first-child {
-    height: 292px;
-}
-
-.e-table-wrap:not(.e-agenda-view) .e-resource-column-table tr:nth-child(2) td:first-child,
-.e-table-wrap:not(.e-agenda-view) .e-resource-column-table tr:nth-child(3) td:first-child {
-    height: 192px;
-} */
-
-
-
-
-#Delete {
-    position: fixed;
-    padding: 0 20px;
- }
-
-
- .schedule-drag-drop .e-table-wrap.e-agenda-view .e-appointment.e-template {
-    display: block;
-    width: 100%;
-}
-
-
 .e-schedule-dialog .e-dlg-content {
-
     .e-subject-container {
         width: 100%;
     }
 
     .e-start-end-row,
     .e-resources-row {
-        pointer-events: none;  /* Prevents clicks */
-        opacity: 0.5;  /* Makes it look disabled */
-        cursor: not-allowed; 
+        pointer-events: none;
+        opacity: 0.5;
+        cursor: not-allowed;
     }
 
     .e-location-container,
@@ -804,135 +600,19 @@
     }
 }
 
-.e-schedule-table .e-appointment.event-swap .e-swap.e-icons,
-.e-schedule-table .e-appointment.event-swapped .e-swapped.e-icons, 
-.e-schedule-table .e-appointment.e-covers .e-replaced.e-icons,
-.e-schedule-table .e-appointment .e-leave.e-icons {
-    font-size: 18px;
-}
-
-.e-quick-popup-wrapper .e-delete.e-icon-btn,
-.e-quick-popup-wrapper .e-edit.e-icon-btn,
+.schedule-shift-management .e-quick-popup-wrapper .e-delete.e-icon-btn,
+.schedule-shift-management .e-quick-popup-wrapper .e-edit.e-icon-btn,
 .e-schedule-dialog .e-footer-content .e-event-delete.e-btn {
     display: none !important;
 }
 
-
-
-
-
-
-.schedule-drag-drop:not(.e-rtl) {
-    .e-schedule-table .e-appointment.event-swap .e-swap.e-icons,
-    .e-schedule-table .e-appointment.event-swapped .e-swapped.e-icons,
-    .e-schedule-table .e-appointment.e-covers .e-replaced.e-icons,
-    .e-schedule-table .e-appointment .e-leave.e-icons {
-        margin-right: 8px;
-    }
-}
-
-
-
-
-.e-rtl.schedule-drag-drop {
-    .role-template-wrap {
-        .role-image {
-            margin: 0 0 0 6px;
-        }
-    }
-
-
-    .e-table-wrap:not(.e-agenda-view ) .e-appointment {
-    
-        .template-wrap {
-            .e-staff {
-                    .staff-image {
-                        margin: 0 0 0 6px;
-                    }
-                }
-        }
-    }
-
-    .e-right-icon {
-        left: 5px;
-        padding: 2px 0 0 2px;
-    }
-
-    .e-schedule-table .e-appointment.event-swap .e-swap.e-icons,
-    .e-schedule-table .e-appointment.event-swapped .e-swapped.e-icons,
-    .e-schedule-table .e-appointment.e-covers .e-replaced.e-icons,
-    .e-schedule-table .e-appointment .e-leave.e-icons {
-        margin-left: 16px;
-    }
-
-    .e-agenda-view .staff-image {
-        margin-left: 9px;
-     }
-
-     .e-appointment.e-template  {
-        padding-right: 19px !important;
-    }
-}
-
-.treeview-external-drag.e-rtl .employee-image {
-    margin: 6px 0px 6px 12px;
-}
-
-.treeview-container.e-rtl .title-text span {
-    margin-right: 12px;
-}
-
-
-.e-localization {
-    width: 20%;
-    display: flex;
-    float: right;
-
-    .e-culture,
-    .e-currency {
-        display: flex;
-        flex-direction: column;
-        padding: 5px;
-    }
-}
-
-
-.e-table-wrap.e-timeline-view {
-
-    .e-resource-cells.e-parent-node,
-    .e-work-cells.e-resource-group-cells {
-        height: 30px;
-    }
-
-    .e-resource-cells.e-child-node,
-    .e-work-cells:not(.e-resource-group-cells){
-        height: 60px;
-    }
-}
-
-
-.e-icon-element {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.swap-icon-center {
-    display: inline-flex;
-    align-items: center;
-    height: 100%;
-    cursor: pointer;
-    margin-left: 5px;
-}
-
-.e-tooltip-wrap {
+.shift-management-tooltip.e-tooltip-wrap {
     border: none !important;
     opacity: 1;
 
     .e-tip-content {
         background-color: #313033;
         color: #F4EFF4 !important;
-
         font-family: 'Roboto';
         font-size: 14px;
         font-weight: 400;
@@ -946,3 +626,7 @@
         color: #313033;
     }
 }
+
+.sf-icon-user-replace:before { content: "\e700"; }
+.sf-icon-replace-accepted:before { content: "\e701"; }
+.sf-icon-replace-request:before { content: "\e702"; }
